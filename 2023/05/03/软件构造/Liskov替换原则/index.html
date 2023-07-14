@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Liskov替换原则（Liskov Substitution Principle，LSP）是面向对象设计中的重要原则之一。本文将介绍Liskov替换原则在Java中的应用，以及如何遵循该原则来构建高质量的代码。 简介Liskov替换原则是由计算机科学家Barbara Liskov提出的，它是SOLID原则中的一部分。该原则表述为：“如果S是T的子类型，那么在程序中任何使用T的地方都可以用S替换，而">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Liskov替换原则">
+<meta property="og:url" content="http://example.com/2023/05/03/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/Liskov%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/index.html">
+<meta property="og:site_name" content="晴雨屋">
+<meta property="og:description" content="Liskov替换原则（Liskov Substitution Principle，LSP）是面向对象设计中的重要原则之一。本文将介绍Liskov替换原则在Java中的应用，以及如何遵循该原则来构建高质量的代码。 简介Liskov替换原则是由计算机科学家Barbara Liskov提出的，它是SOLID原则中的一部分。该原则表述为：“如果S是T的子类型，那么在程序中任何使用T的地方都可以用S替换，而">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-03T14:42:44.000Z">
+<meta property="article:modified_time" content="2023-05-03T15:00:42.000Z">
+<meta property="article:author" content="晴雨">
+<meta property="article:tag" content="软件构造">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/05/03/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/Liskov%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Liskov替换原则 | 晴雨屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">晴雨屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/03/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/Liskov%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Liskov替换原则
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-03 22:42:44 / 修改时间：23:00:42" itemprop="dateCreated datePublished" datetime="2023-05-03T22:42:44+08:00">2023-05-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Liskov替换原则（Liskov Substitution Principle，LSP）是面向对象设计中的重要原则之一。本文将介绍Liskov替换原则在Java中的应用，以及如何遵循该原则来构建高质量的代码。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Liskov替换原则是由计算机科学家Barbara Liskov提出的，它是SOLID原则中的一部分。该原则表述为：“如果S是T的子类型，那么在程序中任何使用T的地方都可以用S替换，而不会导致程序的行为发生变化。”简而言之，LSP要求子类型必须能够替代父类型，而不会引入意外的行为变化。</p>
+<h2 id="接口与实现的一致性"><a href="#接口与实现的一致性" class="headerlink" title="接口与实现的一致性"></a>接口与实现的一致性</h2><p>在Java中，接口是一种常见的定义抽象行为的方式。遵循LSP意味着实现接口的具体类应该能够完全替代接口本身，而不会破坏系统的正确性。具体类应该遵循接口定义的约定和行为，不得修改接口方法的前置条件、后置条件和约定。</p>
+<h2 id="继承关系的合理性"><a href="#继承关系的合理性" class="headerlink" title="继承关系的合理性"></a>继承关系的合理性</h2><p>在Java中，继承是一种重要的代码复用和扩展机制。但是，滥用继承关系可能导致违反LSP。子类应该在继承父类的同时保持一致性和合理性。子类可以扩展父类的行为，但不应该修改父类的约定或者破坏原有的行为。违反LSP的继承关系可能导致意外的错误和行为不一致。</p>
+<h2 id="参数和返回类型的一致性"><a href="#参数和返回类型的一致性" class="headerlink" title="参数和返回类型的一致性"></a>参数和返回类型的一致性</h2><p>方法的参数和返回类型也需要符合LSP。子类的方法应该能够接受父类方法所接受的参数类型，并且返回类型应该是父类方法返回类型的子类型或者相等类型。这确保了代码在使用多态时的正确性。</p>
+<h2 id="设计模式与LSP"><a href="#设计模式与LSP" class="headerlink" title="设计模式与LSP"></a>设计模式与LSP</h2><p>LSP对于许多常见的设计模式也有指导意义。例如，策略模式、模板方法模式等都要求子类能够替代父类并保持行为的一致性。遵循LSP可以增强设计模式的可维护性和可扩展性。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>接下来举一个LSP的经典例子：长方形与正方形问题。<br>在这个例子中，长方形是一个父类，而正方形是一个子类，我们将看到如何遵循LSP以确保正确的行为。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">int</span> width;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">int</span> height;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">int</span> width)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.width = width;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setHeight</span><span class="params">(<span class="type">int</span> height)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.height = height;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">calculateArea</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> width * height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Square</span> <span class="keyword">extends</span> <span class="title class_">Rectangle</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">int</span> width)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.setWidth(width);</span><br><span class="line">        <span class="built_in">super</span>.setHeight(width);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setHeight</span><span class="params">(<span class="type">int</span> height)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.setWidth(height);</span><br><span class="line">        <span class="built_in">super</span>.setHeight(height);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LSPExample</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Rectangle</span> <span class="variable">rectangle</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Rectangle</span>();</span><br><span class="line">        rectangle.setWidth(<span class="number">5</span>);</span><br><span class="line">        rectangle.setHeight(<span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Area of rectangle: &quot;</span> + rectangle.calculateArea());</span><br><span class="line">  </span><br><span class="line">        <span class="type">Rectangle</span> <span class="variable">square</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Square</span>();</span><br><span class="line">        square.setWidth(<span class="number">5</span>);</span><br><span class="line">        square.setHeight(<span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Area of square: &quot;</span> + square.calculateArea());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，我们有一个<code>Rectangle</code>类，它有一个宽度和高度，并提供了计算面积的方法。然后，我们创建了一个子类<code>Square</code>，它继承自<code>Rectangle</code>。<code>Square</code>类重写了父类的<code>setWidth</code>和<code>setHeight</code>方法，以确保宽度和高度始终相等。</p>
+<p>在主方法中，我们首先创建了一个<code>Rectangle</code>对象，并设置宽度为5，高度为10，然后计算面积。接下来，我们创建了一个<code>Square</code>对象，并使用相同的宽度和高度进行设置，并计算面积。</p>
+<p>由于正方形是长方形的特例，根据Liskov替换原则，我们应该能够将<code>Square</code>对象替换为<code>Rectangle</code>对象，而不会引起任何意外的行为变化。在这个例子中，我们确实能够如此，因为<code>Square</code>类的行为与<code>Rectangle</code>类的行为一致。</p>
+<p>运行结果如下：</p>
+<pre><code>Area of rectangle: 50
+Area of square: 25
+</code></pre>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>Liskov替换原则是一项重要的面向对象设计原则，能够帮助我们构建高质量的Java代码。通过遵循LSP，我们可以确保代码的正确性、可维护性和可扩展性。在日常的开发过程中，我们应该时刻牢记LSP的原则，并将其作为代码设计的基石，从而构建出更加健壮和可靠的软件系统。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/" rel="tag"># 软件构造</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/29/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" rel="prev" title="装饰器模式">
+      <i class="fa fa-chevron-left"></i> 装饰器模式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/10/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E5%A7%94%E6%B4%BE/" rel="next" title="委派">
+      委派 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%AE%9E%E7%8E%B0%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">接口与实现的一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB%E7%9A%84%E5%90%88%E7%90%86%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">继承关系的合理性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E5%92%8C%E8%BF%94%E5%9B%9E%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">参数和返回类型的一致性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%8ELSP"><span class="nav-number">5.</span> <span class="nav-text">设计模式与LSP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-number">6.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AE%BA"><span class="nav-number">7.</span> <span class="nav-text">结论</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">晴雨</p>
+  <div class="site-description" itemprop="description">晴雨之中，唯得一小屋以安。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">晴雨</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

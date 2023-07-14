@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="1. Bean标签基本配置默认情况下调用类中的无参构造，如果没有无参构造就会构建失败 基本属性：  id Bean实例在Spring容器中的唯一标识 class Bean的全限定名称  2. Bean标签范围配置scope：对象的作用范围，取值如下    取值范围 单例的    singleton 默认值，单例的   prototype 多例的   request web项目中，Spring创建一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring配置文件">
+<meta property="og:url" content="http://example.com/2023/06/30/spring/Spring/Spring%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="晴雨屋">
+<meta property="og:description" content="1. Bean标签基本配置默认情况下调用类中的无参构造，如果没有无参构造就会构建失败 基本属性：  id Bean实例在Spring容器中的唯一标识 class Bean的全限定名称  2. Bean标签范围配置scope：对象的作用范围，取值如下    取值范围 单例的    singleton 默认值，单例的   prototype 多例的   request web项目中，Spring创建一">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-30T08:40:55.000Z">
+<meta property="article:modified_time" content="2023-07-01T12:43:46.181Z">
+<meta property="article:author" content="晴雨">
+<meta property="article:tag" content="Spring学习">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/06/30/spring/Spring/Spring%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Spring配置文件 | 晴雨屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">晴雨屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/30/spring/Spring/Spring%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spring配置文件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-30 16:40:55" itemprop="dateCreated datePublished" datetime="2023-06-30T16:40:55+08:00">2023-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-01 20:43:46" itemprop="dateModified" datetime="2023-07-01T20:43:46+08:00">2023-07-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-Bean标签基本配置"><a href="#1-Bean标签基本配置" class="headerlink" title="1. Bean标签基本配置"></a>1. Bean标签基本配置</h2><p>默认情况下调用类中的无参构造，如果没有无参构造就会构建失败</p>
+<p>基本属性：</p>
+<ul>
+<li><strong>id</strong> Bean实例在Spring容器中的唯一标识</li>
+<li><strong>class</strong> Bean的全限定名称</li>
+</ul>
+<h2 id="2-Bean标签范围配置"><a href="#2-Bean标签范围配置" class="headerlink" title="2. Bean标签范围配置"></a>2. Bean标签范围配置</h2><p>scope：对象的作用范围，取值如下</p>
+<table>
+<thead>
+<tr>
+<th align="center">取值范围</th>
+<th align="center">单例的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>singleton</strong></td>
+<td align="center">默认值，单例的</td>
+</tr>
+<tr>
+<td align="center"><strong>prototype</strong></td>
+<td align="center">多例的</td>
+</tr>
+<tr>
+<td align="center">request</td>
+<td align="center">web项目中，Spring创建一个Bean的对象，将对象存入到request域中</td>
+</tr>
+<tr>
+<td align="center">session</td>
+<td align="center">web项目中，Spring创建一个Bean的对象，将对象存入到session域中</td>
+</tr>
+<tr>
+<td align="center">global session</td>
+<td align="center">WEB项目中，应用在Portlet环境，如果没有Portlet环境，则相当于session</td>
+</tr>
+</tbody></table>
+<p>（1） singleton时</p>
+<ul>
+<li>Bean的实例化个数：1个</li>
+<li>Bean的实例化时机：当Spring核心文件被加载时，实例化配置的Bean实例</li>
+<li>Bean的生命周期：<ul>
+<li>对象创建：当应用加载，创建容器时，对象就被创建了</li>
+<li>对象运行：只要容器在，对象一直活着</li>
+<li>对象销毁：当应用卸载，销毁容器时，对象就被销毁了</li>
+</ul>
+</li>
+</ul>
+<p>（2） prototype时</p>
+<ul>
+<li>Bean的实例化个数：多个</li>
+<li>Bean的实例化时机：当调用getBean()方法时实例Bean</li>
+<li>Bean的生命周期：<ul>
+<li>对象创建：当调用对象时，创建新的对象实例</li>
+<li>对象运行：只要对象在使用中，就一直活着</li>
+<li>对象销毁：当对象长时间不用时，被java的gc回收了</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-Bean生命周期配置"><a href="#3-Bean生命周期配置" class="headerlink" title="3. Bean生命周期配置"></a>3. Bean生命周期配置</h2><ul>
+<li><strong>init-method</strong> 指定类中的初始化方法名称</li>
+<li><strong>destroy-method</strong> 指定类中销毁方法名称</li>
+</ul>
+<h2 id="4-Bean实例化三种方法"><a href="#4-Bean实例化三种方法" class="headerlink" title="4. Bean实例化三种方法"></a>4. Bean实例化三种方法</h2><ul>
+<li>无参构造方法实例化</li>
+<li>工厂静态方法实例化</li>
+<li>工厂实例方法实例化</li>
+</ul>
+<h2 id="5-Bean的依赖注入分析"><a href="#5-Bean的依赖注入分析" class="headerlink" title="5. Bean的依赖注入分析"></a>5. Bean的依赖注入分析</h2><p>因为UserService和UserDao都在Spring容器中，而最终程序使用的是UserService，所以可以在Spring容器中将UserDao设置在UserService内部</p>
+<h2 id="6-Bean的依赖注入概念"><a href="#6-Bean的依赖注入概念" class="headerlink" title="6. Bean的依赖注入概念"></a>6. Bean的依赖注入概念</h2><p><strong>依赖注入</strong> <em>(Dependency Injection)</em> Spring框架核心IOC的具体实现</p>
+<p>在编写程序时，通过控制反转，将对象的创建交给了Spring，但是代码中不可能出现没有依赖的情况。IOC解耦只是降低了它们的依赖关系，而不会消除。例如，业务层依然会调用持久层的方法。</p>
+<p>这种业务层和持久层的依赖方法，在使用Spring之后，就由Spring来维护了。<br>简单来说，就是坐等框架来把持久层对象传入业务层，而不用我们自己去获取。</p>
+<h2 id="7-Bean的依赖注入方式"><a href="#7-Bean的依赖注入方式" class="headerlink" title="7. Bean的依赖注入方式"></a>7. Bean的依赖注入方式</h2><p>把UserDao注入到UserService内部：</p>
+<ul>
+<li>构造方法</li>
+<li>set方法</li>
+</ul>
+<p>（1）set方法注入<br>除了基本的set方法，还可以使用P命名空间<br>P命名空间本质也是set方法注入，但要更方便一些，主要体现在配置文件上：<br>首先，需要引入P命名空间：<br><code>xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</code><br>其次，需要修改注入方式：<br><code>&lt;bean id=&quot;userService&quot; class=&quot;com.xjy.service.impl.UserServiceImpl&quot; p:userDao-ref=&quot;userDao&quot;/&gt;</code></p>
+<p>（2）构造方法注入</p>
+<h2 id="8-Bean的依赖注入的数据类型"><a href="#8-Bean的依赖注入的数据类型" class="headerlink" title="8. Bean的依赖注入的数据类型"></a>8. Bean的依赖注入的数据类型</h2><p>上面的操作都是注入的引用Bean，除了对象的引用可以注入，普通数据类型、集合等都可以在容器中进行注入</p>
+<p>注入数据的三种类型：</p>
+<ul>
+<li>普通数据类型</li>
+<li>引用数据类型</li>
+<li>集合数据类型</li>
+</ul>
+<h2 id="9-引入其他配置文件（分模块开发）"><a href="#9-引入其他配置文件（分模块开发）" class="headerlink" title="9. 引入其他配置文件（分模块开发）"></a>9. 引入其他配置文件（分模块开发）</h2><p>实际开发中，Spring的配置内容非常多，导致Spring配置很繁杂而且体积庞大， 所以，可以将部分配置拆解到其他配置文件中，而在Spring主配置文件通过import标签进行加载<br><code>&lt;import resource=&quot;applicationContext-xxx.xml&quot;/&gt;</code></p>
+<h2 id="10-总结"><a href="#10-总结" class="headerlink" title="10. 总结"></a>10. 总结</h2><p><strong>Spring的重点配置</strong></p>
+<ul>
+<li>&lt;bean&gt;标签:  <ul>
+<li>id属性：在容器Bean实例的唯一标识，不允许重复</li>
+<li>class属性：要实例化的Bean的全限定名</li>
+<li>scope属性：Bean的作用范围，常用Singleton（默认值）和prototype</li>
+<li>&lt;property&gt; 标签：属性注入<ul>
+<li>name属性：属性名称</li>
+<li>value属性：注入的普通属性值</li>
+<li>ref属性：注入的对象引用值</li>
+<li>&lt;list&gt;标签</li>
+<li>&lt;map&gt;标签</li>
+<li>&lt;propertier&gt;标签</li>
+</ul>
+</li>
+<li>&lt;constructor-arg&gt;标签</li>
+</ul>
+</li>
+<li>&lt;import&gt;标签：导入其他的Spring的分文件</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Spring%E5%AD%A6%E4%B9%A0/" rel="tag"># Spring学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/22/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E6%96%AD%E8%A8%80/" rel="prev" title="java中的断言">
+      <i class="fa fa-chevron-left"></i> java中的断言
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/30/spring/Spring/Spring%E7%9B%B8%E5%85%B3API/" rel="next" title="Spring相关API">
+      Spring相关API <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Bean%E6%A0%87%E7%AD%BE%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">1. Bean标签基本配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Bean%E6%A0%87%E7%AD%BE%E8%8C%83%E5%9B%B4%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">2. Bean标签范围配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Bean%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">3. Bean生命周期配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Bean%E5%AE%9E%E4%BE%8B%E5%8C%96%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">4. Bean实例化三种方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Bean%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">5. Bean的依赖注入分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Bean%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%A6%82%E5%BF%B5"><span class="nav-number">6.</span> <span class="nav-text">6. Bean的依赖注入概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-Bean%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">7. Bean的依赖注入方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-Bean%E7%9A%84%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">8.</span> <span class="nav-text">8. Bean的依赖注入的数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-%E5%BC%95%E5%85%A5%E5%85%B6%E4%BB%96%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%88%E5%88%86%E6%A8%A1%E5%9D%97%E5%BC%80%E5%8F%91%EF%BC%89"><span class="nav-number">9.</span> <span class="nav-text">9. 引入其他配置文件（分模块开发）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E6%80%BB%E7%BB%93"><span class="nav-number">10.</span> <span class="nav-text">10. 总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">晴雨</p>
+  <div class="site-description" itemprop="description">晴雨之中，唯得一小屋以安。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">晴雨</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
