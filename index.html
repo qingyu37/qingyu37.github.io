@@ -147,7 +147,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/14/%E5%8A%9B%E6%89%A3/%E5%89%91%E6%8C%87offer/005.%20%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -161,7 +161,81 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/07/14/%E5%8A%9B%E6%89%A3/%E5%89%91%E6%8C%87offer/005.%20%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B9%98%E7%A7%AF/" class="post-title-link" itemprop="url">单词长度的最大乘积</a>
+            <a href="/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-08-24 14:04:52" itemprop="dateCreated datePublished" datetime="2023-08-24T14:04:52+08:00">2023-08-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-08-25 21:01:04" itemprop="dateModified" datetime="2023-08-25T21:01:04+08:00">2023-08-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="长度最小的子数组"><a href="#长度最小的子数组" class="headerlink" title="长度最小的子数组"></a>长度最小的子数组</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个含有 n 个正整数的数组和一个正整数 target 。</p>
+<p>找出该数组中满足其和 ≥ target 的长度最小的 连续子数组 [numsl, numsl+1, …, numsr-1, numsr] ，并返回其长度。如果不存在符合条件的子数组，返回 0。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="方法一：二分查找法"><a href="#方法一：二分查找法" class="headerlink" title="方法一：二分查找法"></a>方法一：二分查找法</h3><p>首先计算前缀和数组sums，然后对于每个开始下标 i，可通过二分查找得到大于或等于 i 的最小下标 temp，使得 sums[temp]-sums[i-1]≥s，并更新子数组的最小长度</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minSubArrayLen</span><span class="params">(<span class="type">int</span> target, <span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> Integer.MAX_VALUE;</span><br><span class="line">        <span class="comment">// 前缀和数组</span></span><br><span class="line">        <span class="type">int</span>[] sums = <span class="keyword">new</span> <span class="title class_">int</span>[n + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="comment">// 计算前缀和</span></span><br><span class="line">            sums[i] = sums[i - <span class="number">1</span>] + nums[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">              <span class="type">int</span> <span class="variable">s</span> <span class="operator">=</span> target + sums[i - <span class="number">1</span>];</span><br><span class="line">              <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> Arrays.binarySearch(sums, s);</span><br><span class="line">              <span class="keyword">if</span> (temp &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                  temp = -temp - <span class="number">1</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">if</span> (temp &lt;= n) &#123;</span><br><span class="line">                  ans = Math.min(ans, temp - (i - <span class="number">1</span>));</span><br><span class="line">              &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果没有满足条件的最小子数组，则返回0</span></span><br><span class="line">        ans = ans == Integer.MAX_VALUE ? <span class="number">0</span> : ans;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种方法的时间复杂度为O(nlgn)，不太理想</p>
+<h3 id="方法二：滑动窗口"><a href="#方法二：滑动窗口" class="headerlink" title="方法二：滑动窗口"></a>方法二：滑动窗口</h3><p>使用方法一时，每次确定满足条件的最小下标 temp 耗费了大量的时间，为了对这点进行优化，使用滑动窗口。</p>
+<p>定义两个指针 start 和 end 表示滑动窗口(子数组)的开始和结束位置，并用 sum 存储子数组元素和。</p>
+<p>每轮迭代，将 nums[end] 加到 sum 上，如果 sum ≥ s，则去更新子数组的最小长度，然后将 nums[start] 从 sum 减去并将 start 右移，直到 sum &lt; s，同时更新子数组的最小长度。迭代结束时，将 end 右移。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E5%8F%8C%E6%8C%87%E9%92%88/%E9%AA%8C%E8%AF%81%E5%9B%9E%E6%96%87%E4%B8%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E5%8F%8C%E6%8C%87%E9%92%88/%E9%AA%8C%E8%AF%81%E5%9B%9E%E6%96%87%E4%B8%B2/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta">
@@ -172,7 +246,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-07-14 09:45:14 / 修改时间：09:27:34" itemprop="dateCreated datePublished" datetime="2023-07-14T09:45:14+08:00">2023-07-14</time>
+              <time title="创建时间：2023-08-24 13:35:22 / 修改时间：14:00:31" itemprop="dateCreated datePublished" datetime="2023-08-24T13:35:22+08:00">2023-08-24</time>
             </span>
 
           
@@ -186,12 +260,85 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个字符串数组 words，请计算当两个字符串 words[i] 和 words[j] 不包含相同字符时，它们长度的乘积的最大值。假设字符串中只包含英语的小写字母。如果没有不包含相同字符的一对字符串，返回 0。</p>
-<p>示例 1:<br>输入: words &#x3D; [“abcw”,”baz”,”foo”,”bar”,”fxyz”,”abcdef”]<br>输出: 16<br>解释: 这两个单词为 “abcw”, “fxyz”。它们不包含相同字符，且长度的乘积最大。</p>
-<p>示例 2:<br>输入: words &#x3D; [“a”,”ab”,”abc”,”d”,”cd”,”bcd”,”abcd”]<br>输出: 4<br>解释: 这两个单词为 “ab”, “cd”。</p>
-<p>示例 3:<br>输入: words &#x3D; [“a”,”aa”,”aaa”,”aaaa”]<br>输出: 0<br>解释: 不存在这样的两个单词。<br> <br>提示：<br>2 &lt;&#x3D; words.length &lt;&#x3D; 1000<br>1 &lt;&#x3D; words[i].length &lt;&#x3D; 1000<br>words[i] 仅包含小写字母</p>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>使用位掩码。本题需要判断两个字符串之间是否有重合字母，为此我们可以使用位掩码技术。用从0-25位分别代表字母’a’-‘z’，某位为1则代表该单词中存在对应的字母，否则不存在。<br>这样用一个数组masks把每个单词存在的字母存储起来，比较两个单词是否存在相同字母：masks[i]&amp;masks[j]&#x3D;0，则代表这两个单词没有共同字母，就用这两个字母的长度更新最大乘积</p>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxProduct</span><span class="params">(String[] words)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">ans</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span>[] masks = <span class="keyword">new</span> <span class="title class_">int</span>[words.length];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; words.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">word</span> <span class="operator">=</span> words[i];</span><br><span class="line"></span><br><span class="line">            <span class="type">int</span> <span class="variable">wordLength</span> <span class="operator">=</span> word.length();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; wordLength; j++) &#123;</span><br><span class="line"></span><br><span class="line">                masks[i] |= <span class="number">1</span> &lt;&lt; (word.charAt(j) - <span class="string">&#x27;a&#x27;</span>);</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; words.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> i + <span class="number">1</span>; j &lt; words.length; j++) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> ((masks[i] &amp; masks[j]) == <span class="number">0</span>) &#123;</span><br><span class="line"></span><br><span class="line">                    ans = Math.max(ans, words[i].length() * words[j].length());</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="验证回文串"><a href="#验证回文串" class="headerlink" title="验证回文串"></a>验证回文串</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>如果在将所有大写字符转换为小写字符、并移除所有非字母数字字符之后，短语正着读和反着读都一样。则可以认为该短语是一个 回文串。</p>
+<p>字母和数字都属于字母数字字符。</p>
+<p>给你一个字符串 s，如果它是 回文串 ，返回 true ；否则，返回 false。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="方法一：双指针法"><a href="#方法一：双指针法" class="headerlink" title="方法一：双指针法"></a>方法一：双指针法</h3><p>首先按照题目要求，把字符串的大写字符转换成小写字符，然后移除掉非字母数字字符，其中后者我是利用replaceAll()实现的，使用正则表达式把所有的非字母数字字符替换成空格。</p>
+<p>然后再使用双指针，依次判断字符串的首尾对应是否相等即可。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(String s)</span> &#123;</span><br><span class="line">        s = s.toLowerCase();</span><br><span class="line">        s = s.replaceAll(<span class="string">&quot;[^0-9a-z]&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (s.length() == <span class="number">0</span> || s.length() == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = s.length() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (s.charAt(i++) != s.charAt(j--)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是实际执行的时间和空间情况不太好，我猜测可能是调用的字符串的api导致的，所以又对此优化了一下。</p>
+<h3 id="方法二：优化双指针法"><a href="#方法二：优化双指针法" class="headerlink" title="方法二：优化双指针法"></a>方法二：优化双指针法</h3><p>主要是删了字符串的那两个api的调用，而是改成了更小的判断。代码的时间和空间情况有了一定的优化。</p>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isPalindrome</span><span class="params">(String s)</span> &#123;</span><br><span class="line">       <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> s.length();</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = n - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">            <span class="keyword">while</span> (i &lt; j &amp;&amp; !Character.isLetterOrDigit(s.charAt(i))) &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span> (i &lt; j &amp;&amp; !Character.isLetterOrDigit(s.charAt(j))) &#123;</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (i &lt; j &amp;&amp; Character.toLowerCase(s.charAt(i)) != Character.toLowerCase(s.charAt(j))) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            i++;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-24 12:43:00 / 修改时间：13:37:21" itemprop="dateCreated datePublished" datetime="2023-08-24T12:43:00+08:00">2023-08-24</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="合并两个有序数组"><a href="#合并两个有序数组" class="headerlink" title="合并两个有序数组"></a>合并两个有序数组</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你两个按 非递减顺序 排列的整数数组 nums1 和 nums2，另有两个整数 m 和 n ，分别表示 nums1 和 nums2 中的元素数目。</p>
+<p>请你 合并 nums2 到 nums1 中，使合并后的数组同样按 非递减顺序 排列。</p>
+<p>注意：最终，合并后数组不应由函数返回，而是存储在数组 nums1 中。为了应对这种情况，nums1 的初始长度为 m + n，其中前 m 个元素表示应合并的元素，后 n 个元素为 0 ，应忽略。nums2 的长度为 n。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="方法一：双指针法"><a href="#方法一：双指针法" class="headerlink" title="方法一：双指针法"></a>方法一：双指针法</h3><p>因为 nums1 要作为结果数组，所以使用一个新的临时数组 ans 来复制一份nums1，然后将 ans 和 nums2的数据依次比较，每次将较小数存入 nums1 中，比较结束后将较大数组的多余数据存入 nums1 即可。<br>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span>[] nums1, <span class="type">int</span> m, <span class="type">int</span>[] nums2, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] ans = <span class="keyword">new</span> <span class="title class_">int</span>[m];</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, j = <span class="number">0</span>, k = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (; i &lt; m; i++) &#123;</span><br><span class="line">            ans[i] = nums1[i];</span><br><span class="line">        &#125;</span><br><span class="line">        i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (j &lt; m &amp;&amp; k &lt; n) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ans[j] &lt; nums2[k]) &#123;</span><br><span class="line">                nums1[i++] = ans[j++];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                nums1[i++] = nums2[k++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (j &lt; m) &#123;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; m) &#123;</span><br><span class="line">                nums1[i++] = ans[j++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (k &lt; n) &#123;</span><br><span class="line">            <span class="keyword">while</span> (k &lt; n) &#123;</span><br><span class="line">                nums1[i++] = nums2[k++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法二：逆向双指针法"><a href="#方法二：逆向双指针法" class="headerlink" title="方法二：逆向双指针法"></a>方法二：逆向双指针法</h3><p>使用双指针法因为要对 nums1 的前半部分进行修改，所以需要一个临时数组，而注意到 nums1 的后半部分是空白的，所以可以使用逆向双指针，也就是从最大值开始确定，每次选择两个数组中未处理的最大值放入 nums1 的未使用的最后面，从而避免了临时数组的使用，节省了一部分空间。<br>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">merge</span><span class="params">(<span class="type">int</span>[] nums1, <span class="type">int</span> m, <span class="type">int</span>[] nums2, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> m - <span class="number">1</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> n - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> m + n - <span class="number">1</span>;k &gt;= <span class="number">0</span>; k--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j &lt; <span class="number">0</span> || (i &gt;= <span class="number">0</span> &amp;&amp; nums1[i] &gt;= nums2[j])) &#123;</span><br><span class="line">                nums1[k] = nums1[i];</span><br><span class="line">                i--;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                nums1[k] = nums2[j];</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>逆向双指针法是看的题解，我自己是没有注意到 nums1 的后半部分是空白的这一点。</p>
 
       
     </div>
@@ -833,174 +980,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/30/spring/Spring/Spring%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/30/spring/Spring/Spring%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90/" class="post-title-link" itemprop="url">Spring相关API</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-30 21:15:20" itemprop="dateCreated datePublished" datetime="2023-06-30T21:15:20+08:00">2023-06-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-01 20:43:47" itemprop="dateModified" datetime="2023-07-01T20:43:47+08:00">2023-07-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-数据源（连接池）的作用"><a href="#1-数据源（连接池）的作用" class="headerlink" title="1. 数据源（连接池）的作用"></a>1. 数据源（连接池）的作用</h2><ul>
-<li><p>数据源是为了提高程序性能而出现的</p>
-</li>
-<li><p>事先实例化数据源，初始化部分连接资源</p>
-</li>
-<li><p>使用连接资源时从数据源中获取</p>
-</li>
-<li><p>使用完毕后将连接资源归还给数据源</p>
-<pre><code>  常见数据源：DBCP、C3P0、BoneCP、Druid等
-</code></pre>
-</li>
-</ul>
-<h2 id="2-数据源的开发步骤"><a href="#2-数据源的开发步骤" class="headerlink" title="2. 数据源的开发步骤"></a>2. 数据源的开发步骤</h2><ol>
-<li>导入数据源的坐标和数据库驱动坐标</li>
-<li>创建数据源对象</li>
-<li>设置数据源的基本连接数据</li>
-<li>使用数据源获取连接资源和归还连接资源</li>
-</ol>
-<h2 id="3-Spring配置数据源"><a href="#3-Spring配置数据源" class="headerlink" title="3. Spring配置数据源"></a>3. Spring配置数据源</h2><p>可以将DataSource的创建权交由Spring来完成</p>
-<h2 id="4-抽取jdbc配置文件"><a href="#4-抽取jdbc配置文件" class="headerlink" title="4. 抽取jdbc配置文件"></a>4. 抽取jdbc配置文件</h2><p>applicationContext.xml加载jdbc.propertites配置文件获得连接信息。</p>
-<p>首先，引入context命名空间和约束路径：</p>
-<ul>
-<li>命名空间：<em>xmlns:context&#x3D;”<a target="_blank" rel="noopener" href="http://www.springframework.org/schema/context">http://www.springframework.org/schema/context</a>“</em></li>
-<li>约束路径：<em><a target="_blank" rel="noopener" href="http://www.springframework.org/schema/context">http://www.springframework.org/schema/context</a></em><br>  <em><a target="_blank" rel="noopener" href="http://www.springframework.org/schema/context/spring-context.xsd">http://www.springframework.org/schema/context/spring-context.xsd</a></em></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;  </span><br><span class="line">&lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;  </span><br><span class="line">&lt;property name=&quot;driverClass&quot; value=&quot;$&#123;jdbc.driver&#125;&quot;/&gt;  </span><br><span class="line">&lt;property name=&quot;jdbcUrl&quot; value=&quot;$&#123;jdbc.url&#125;&quot;/&gt;  </span><br><span class="line">&lt;property name=&quot;user&quot; value=&quot;$&#123;jdbc.username&#125;&quot;/&gt;  </span><br><span class="line">&lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot;/&gt;  </span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="5-总结"><a href="#5-总结" class="headerlink" title="5. 总结"></a>5. 总结</h2><p>Spring容器加载properties文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:property-placeholder location=&quot;xx.properties&quot;/&gt;</span><br><span class="line">&lt;property name=&quot;xx&quot; value=&quot;$&#123;key&#125;&quot;/&gt;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/30/spring/Spring/Spring%E7%9B%B8%E5%85%B3API/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/30/spring/Spring/Spring%E7%9B%B8%E5%85%B3API/" class="post-title-link" itemprop="url">Spring相关API</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-30 20:12:13 / 修改时间：21:14:12" itemprop="dateCreated datePublished" datetime="2023-06-30T20:12:13+08:00">2023-06-30</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-ApplicationContext的继承体系"><a href="#1-ApplicationContext的继承体系" class="headerlink" title="1. ApplicationContext的继承体系"></a>1. ApplicationContext的继承体系</h2><p>applicationContext：接口类型，代表应用上下文，可以通过其实例获得Spring容器中的Bean对象<br><img src="https://s2.loli.net/2023/06/30/YXL3lfmrxIu5Ws8.png" alt="20191226154557828.png"></p>
-<h2 id="2-ApplicationContext的实现类"><a href="#2-ApplicationContext的实现类" class="headerlink" title="2. ApplicationContext的实现类"></a>2. ApplicationContext的实现类</h2><ol>
-<li>ClassPathXmlApplicationContext<ul>
-<li>从类的根路径下加载配置文件推荐用这种</li>
-</ul>
-</li>
-<li>FileSystemXmlApplicationContext<ul>
-<li>从磁盘路径上加载配置文件，配置文件可以在磁盘的任意位置</li>
-</ul>
-</li>
-<li>AnnotationConfigApplicationContext<ul>
-<li>当使用注解配置容器对象时，需要使用此类来创建spring容器，用它来读取注解</li>
-</ul>
-</li>
-</ol>
-<h2 id="3-getBean-方法使用"><a href="#3-getBean-方法使用" class="headerlink" title="3. getBean()方法使用"></a>3. getBean()方法使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">getBean</span><span class="params">(String name)</span> <span class="keyword">throws</span> BeansException &#123;  </span><br><span class="line">	<span class="built_in">this</span>.assertBeanFactoryActive();  </span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.getBeanFactory().getBean(name);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> &lt;T&gt; T <span class="title function_">getBean</span><span class="params">(String name, Class&lt;T&gt; requiredType)</span> <span class="keyword">throws</span> BeansException &#123;  </span><br><span class="line">	<span class="built_in">this</span>.assertBeanFactoryActive();  </span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.getBeanFactory().getBean(name, requiredType);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><p>Spring的重点API</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext app = new ClasspathXmlApplicationContext(&quot;xml文件&quot;)</span><br><span class="line">app.getBean(&quot;id&quot;)</span><br><span class="line">app.getBean(&quot;Class&quot;)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1070,12 +1049,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
