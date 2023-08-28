@@ -147,6 +147,180 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/04/spring/springMVC/SpringMVC%E8%8E%B7%E5%BE%97%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/04/spring/springMVC/SpringMVC%E8%8E%B7%E5%BE%97%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">SpringMVC的数据响应</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-04 22:38:21" itemprop="dateCreated datePublished" datetime="2023-07-04T22:38:21+08:00">2023-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-09 21:37:06" itemprop="dateModified" datetime="2023-07-09T21:37:06+08:00">2023-07-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-获得请求参数"><a href="#1-获得请求参数" class="headerlink" title="1. 获得请求参数"></a>1. 获得请求参数</h2><p>客户端请求参数的格式是：name&#x3D;value&amp;name&#x3D;value…<br>服务器端要获得请求的参数，有时还需要进行数据的封装，SpringMVC可以接受如下类型的参数：</p>
+<ul>
+<li>基本类型参数</li>
+<li>POJO类型参数</li>
+<li>数组类型参数</li>
+<li>集合类型参数</li>
+</ul>
+<h3 id="1-获得基本类型参数"><a href="#1-获得基本类型参数" class="headerlink" title="1. 获得基本类型参数"></a>1. 获得基本类型参数</h3><p>Controller中的业务方法的参数名称要与请求参数的name一致，参数值会自动映射匹配。<br><code>http:localhost:8080/springmvc1/quick?username=zhangsan&amp;age=15</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value=&quot;/quick5&quot;)</span>  </span><br><span class="line"><span class="meta">@ResponseBody</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save5</span><span class="params">(String username, <span class="type">int</span> age)</span> <span class="keyword">throws</span> IOException &#123;  </span><br><span class="line">	System.out.println(username);  </span><br><span class="line">	System.out.println(age);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-获取POJO类型参数"><a href="#2-获取POJO类型参数" class="headerlink" title="2. 获取POJO类型参数"></a>2. 获取POJO类型参数</h3><p>Controller中的业务方法的POJO的参数的属性名与请求参数的name一致，参数值会自动映射匹配<br><code>http:localhost:8080/springmvc/quick?username=zhangsan&amp;age=15</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> String username;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">	getter/setter...</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@RequestMapping(User user)</span> Throws IOException &#123;</span><br><span class="line">	System.out.pringln(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="3-获取数组类型参数"><a href="#3-获取数组类型参数" class="headerlink" title="3. 获取数组类型参数"></a>3. 获取数组类型参数</h3><p>Controller中的业务方法数组名称与请求参数的name一致，参数值会自动映射匹配<br><code>http:localhost:8080/springmvc1/quick?strs=aaa&amp;strs=bbb&amp;strs=ccc</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value=&quot;/quick6&quot;)</span>  </span><br><span class="line"><span class="meta">@ResponseBody</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save6</span><span class="params">(String[] strs)</span> <span class="keyword">throws</span> IOException &#123;  </span><br><span class="line">	System.out.println(Arrays.asList(strs));  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-获得集合类型参数"><a href="#4-获得集合类型参数" class="headerlink" title="4. 获得集合类型参数"></a>4. 获得集合类型参数</h3><p>获得集合参数时，要将集合参数包装到一个POJO中才可以</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> VO &#123;</span><br><span class="line">	<span class="keyword">private</span> List&lt;User&gt; userList;</span><br><span class="line">	setter/getter...</span><br><span class="line">	toString...</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="meta">@RequestMapping(value=&quot;/quick7&quot;)</span>  </span><br><span class="line"><span class="meta">@ResponseBody</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save7</span><span class="params">(VO vo)</span> <span class="keyword">throws</span> IOException &#123;  </span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当使用ajax请求时，可以指定contentType为json形式，那么在方法参数位置使用@RequestBody可以直接接收集合数据而无需使用POJO进行包装</p>
+<p>&#96;&#96;&#96;java<br>@RequestMapping(value&#x3D;”&#x2F;quick”)<br>@ResponseBody<br>public void save(@RequestBody List<User> userList) throws IOException {<br>    system.out.println(userList);</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/04/spring/springMVC/SpringMVC%E7%9A%84%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/04/spring/springMVC/SpringMVC%E7%9A%84%E6%95%B0%E6%8D%AE%E5%93%8D%E5%BA%94/" class="post-title-link" itemprop="url">SpringMVC的数据响应</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-04 21:45:21 / 修改时间：22:35:25" itemprop="dateCreated datePublished" datetime="2023-07-04T21:45:21+08:00">2023-07-04</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-SpringMVC的数据响应方式"><a href="#1-SpringMVC的数据响应方式" class="headerlink" title="1. SpringMVC的数据响应方式"></a>1. SpringMVC的数据响应方式</h2><ol>
+<li>页面跳转<ul>
+<li>直接返回字符串</li>
+<li>通过ModelAndView对象返回</li>
+</ul>
+</li>
+<li>回写数据<ul>
+<li>直接返回字符串</li>
+<li>返回对象或集合</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-页面跳转"><a href="#2-页面跳转" class="headerlink" title="2. 页面跳转"></a>2. 页面跳转</h2><h3 id="1-返回字符串形式"><a href="#1-返回字符串形式" class="headerlink" title="1. 返回字符串形式"></a>1. 返回字符串形式</h3><p>直接返回字符串：将返回的字符串与视图解析器的前后缀拼接后跳转</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/quick&quot;)</span><br><span class="line">public String quickMethod() &#123;</span><br><span class="line">	return &quot;index&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;property name=<span class="string">&quot;prefix&quot;</span> value=<span class="string">&quot;/jsp/&quot;</span>&gt;&lt;/property&gt;  </span><br><span class="line">&lt;property name=<span class="string">&quot;suffix&quot;</span> value=<span class="string">&quot;.jsp&quot;</span>&gt;&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+
+<p>返回带有前缀的字符串：</p>
+<ul>
+<li>转发：forward:&#x2F;WEB-INF&#x2F;views&#x2F;index.jsp</li>
+<li>重定向：redirect:&#x2F;index.jsp</li>
+</ul>
+<h3 id="2-返回ModelAndView对象"><a href="#2-返回ModelAndView对象" class="headerlink" title="2. 返回ModelAndView对象"></a>2. 返回ModelAndView对象</h3><h2 id="3-回写数据"><a href="#3-回写数据" class="headerlink" title="3. 回写数据"></a>3. 回写数据</h2><h3 id="1-直接返回字符串"><a href="#1-直接返回字符串" class="headerlink" title="1. 直接返回字符串"></a>1. 直接返回字符串</h3><p>Web基础阶段，客户端访问服务器端，如果想直接回写字符串作为响应体返回的话，只需要使用response.getWriter().print(“hello world”)即可，如果想在Controller中直接回写字符串：</p>
+<p>通过SpringMVC框架注入的response对象，使用response.getWriter().print(“hello world”)回写数据，此时不需要试图跳转，业务方法返回值为void</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value=&quot;/quick4&quot;)</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save4</span><span class="params">(HttpServletResponse httpServletResponse)</span> <span class="keyword">throws</span> IOException &#123;  </span><br><span class="line">	httpServletResponse.getWriter().print(<span class="string">&quot;hello world&quot;</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将需要回写的字符串直接返回，但此时需要通过”<strong>@ResponseBody</strong>“，告知SpringMVC框架，该方法不进行试图跳转，直接进行数据响应</p>
+<h3 id="2-返回对象或集合"><a href="#2-返回对象或集合" class="headerlink" title="2. 返回对象或集合"></a>2. 返回对象或集合</h3><p>在方法上加上 <strong>@ResponseBody</strong> 可以返回json格式的字符串，但是配置较麻烦；可以使用mvc的注解驱动代替上述配置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mvc:annotation-driven/&gt;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/03/spring/springMVC/SpringMVC%E7%BB%84%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -932,166 +1106,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/22/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E6%96%AD%E8%A8%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/22/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E6%96%AD%E8%A8%80/" class="post-title-link" itemprop="url">java中的断言</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-22 22:40:55" itemprop="dateCreated datePublished" datetime="2023-05-22T22:40:55+08:00">2023-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-24 11:29:51" itemprop="dateModified" datetime="2023-05-24T11:29:51+08:00">2023-05-24</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在软件开发中，调试和测试是不可或缺的步骤。为了帮助开发人员在代码中捕获潜在的错误和异常，Java引入了断言（assertions）机制。断言是一种声明，用于在代码中插入检查点，以确保某个条件为真。本文将深入探讨Java中的断言机制，包括其语法、工作原理和最佳实践。</p>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>在Java中，断言使用<code>assert</code>关键字来定义。其基本语法形式如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> condition;</span><br></pre></td></tr></table></figure>
-<p>其中，<code>condition</code>是需要进行检查的条件表达式。如果<code>condition</code>为假，断言将失败并抛出<code>AssertionError</code>异常。</p>
-<h2 id="启用和禁用"><a href="#启用和禁用" class="headerlink" title="启用和禁用"></a>启用和禁用</h2><p>默认情况下，Java虚拟机在执行代码时将忽略断言。为了启用断言，我们可以在启动Java程序时使用命令行选项<code>-ea</code>或<code>-enableassertions</code>。例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea MyProgram</span><br></pre></td></tr></table></figure>
-<p>这将启用<code>MyProgram</code>中的所有断言。如果只想为特定的类或包启用断言，可以使用<code>-ea:</code>或<code>-da:</code>选项。例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea:com.example MyProgram</span><br></pre></td></tr></table></figure>
-<p>这将仅启用<code>com.example</code>包中的断言。</p>
-<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>当启用断言时，Java虚拟机将在执行代码中的断言语句时进行检查。如果断言失败（即条件为假），则会抛出<code>AssertionError</code>异常。这个异常可以被捕获和处理，或者在没有处理的情况下导致程序终止。</p>
-<h2 id="使用注意"><a href="#使用注意" class="headerlink" title="使用注意"></a>使用注意</h2><ul>
-<li>断言主要用于调试和开发阶段，不应在生产环境中过度使用。</li>
-<li>断言应该用于检查不应该发生的情况，而不是用于处理可能发生的错误。</li>
-<li>断言的条件应该是纯粹的布尔表达式，避免在断言中执行复杂的操作。</li>
-<li>断言不应该改变程序的状态或产生副作用。</li>
-<li>断言的信息应该清晰明了，方便识别断言失败的原因。</li>
-</ul>
-<h2 id="与异常处理的区别"><a href="#与异常处理的区别" class="headerlink" title="与异常处理的区别"></a>与异常处理的区别</h2><p>断言与异常处理有所不同。断言是用于调试目的，用于捕获程序中的逻辑错误和不一致性。异常处理则用于处理运行时异常和错误条件。断言应该关注于程序的正确性和一致性，而异常处理则关注于程序的可靠性和健壮性。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>断言是Java中一个有用的调试工具，可以帮助开发人员捕获潜在的错误和异常。通过合理使用断言，开发人员可以更早地发现和解决问题，提高代码的质量和可靠性。然而，断言应该谨慎使用，并在生产环境中进行适当的禁用，以避免不必要的性能开销。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/11/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/11/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">设计模式总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-05-11 22:44:19 / 修改时间：23:24:19" itemprop="dateCreated datePublished" datetime="2023-05-11T22:44:19+08:00">2023-05-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>前两天终于做完软构lab3了，接下来对java中的一些设计模式做一个简单的总结。<br>首先，同样推荐一个b站up主@林斯基JI，它的设计模式讲的挺好的，距离生动形象。</p>
-<ol>
-<li><p>工厂模式（Factory Pattern）： 工厂模式用于创建对象，将对象的创建逻辑与客户端代码分离。它通过一个工厂类来创建对象，客户端只需调用工厂类的方法即可获取所需的对象。工厂模式可以根据条件返回不同的对象实例，提供了灵活性和可扩展性。</p>
-</li>
-<li><p>观察者模式（Observer Pattern）： 观察者模式定义了对象之间的一对多依赖关系，当一个对象的状态发生变化时，其依赖的对象将自动得到通知并更新。在Java中，观察者模式可以使用<code>java.util.Observer</code>接口和<code>java.util.Observable</code>类实现。</p>
-</li>
-<li><p>装饰器模式（Decorator Pattern）： 装饰器模式允许动态地向对象添加额外的功能，而不需要修改其原始类。它通过将对象包装在装饰器类中，逐层叠加功能来实现。在Java中，可以使用继承和接口来实现装饰器模式。</p>
-</li>
-<li><p>策略模式（Strategy Pattern）： 策略模式定义了一组算法，将其封装成独立的策略类，并使它们可以互相替换。客户端可以根据需求选择不同的策略，而不需要了解具体的算法实现细节。在Java中，策略模式可以通过接口和多态性来实现。</p>
-</li>
-<li><p>适配器模式（Adapter Pattern）： 适配器模式用于将一个类的接口转换成客户端所期望的另一个接口。它使得原本不兼容的类可以一起工作。适配器模式可以通过继承或组合来实现适配器类。</p>
-</li>
-<li><p>模板方法模式（Template Method Pattern）： 模板方法模式定义了一个算法的骨架，将某些步骤的具体实现延迟到子类中。它提供了一个模板方法来定义算法的框架，而具体的步骤实现由子类决定。在Java中，可以使用抽象类和钩子方法来实现模板方法模式。</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1157,12 +1175,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>

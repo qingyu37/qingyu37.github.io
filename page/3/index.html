@@ -147,6 +147,162 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/22/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E6%96%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/22/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E6%96%AD%E8%A8%80/" class="post-title-link" itemprop="url">java中的断言</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-22 22:40:55" itemprop="dateCreated datePublished" datetime="2023-05-22T22:40:55+08:00">2023-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-24 11:29:51" itemprop="dateModified" datetime="2023-05-24T11:29:51+08:00">2023-05-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在软件开发中，调试和测试是不可或缺的步骤。为了帮助开发人员在代码中捕获潜在的错误和异常，Java引入了断言（assertions）机制。断言是一种声明，用于在代码中插入检查点，以确保某个条件为真。本文将深入探讨Java中的断言机制，包括其语法、工作原理和最佳实践。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>在Java中，断言使用<code>assert</code>关键字来定义。其基本语法形式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span> condition;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>condition</code>是需要进行检查的条件表达式。如果<code>condition</code>为假，断言将失败并抛出<code>AssertionError</code>异常。</p>
+<h2 id="启用和禁用"><a href="#启用和禁用" class="headerlink" title="启用和禁用"></a>启用和禁用</h2><p>默认情况下，Java虚拟机在执行代码时将忽略断言。为了启用断言，我们可以在启动Java程序时使用命令行选项<code>-ea</code>或<code>-enableassertions</code>。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea MyProgram</span><br></pre></td></tr></table></figure>
+<p>这将启用<code>MyProgram</code>中的所有断言。如果只想为特定的类或包启用断言，可以使用<code>-ea:</code>或<code>-da:</code>选项。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -ea:com.example MyProgram</span><br></pre></td></tr></table></figure>
+<p>这将仅启用<code>com.example</code>包中的断言。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>当启用断言时，Java虚拟机将在执行代码中的断言语句时进行检查。如果断言失败（即条件为假），则会抛出<code>AssertionError</code>异常。这个异常可以被捕获和处理，或者在没有处理的情况下导致程序终止。</p>
+<h2 id="使用注意"><a href="#使用注意" class="headerlink" title="使用注意"></a>使用注意</h2><ul>
+<li>断言主要用于调试和开发阶段，不应在生产环境中过度使用。</li>
+<li>断言应该用于检查不应该发生的情况，而不是用于处理可能发生的错误。</li>
+<li>断言的条件应该是纯粹的布尔表达式，避免在断言中执行复杂的操作。</li>
+<li>断言不应该改变程序的状态或产生副作用。</li>
+<li>断言的信息应该清晰明了，方便识别断言失败的原因。</li>
+</ul>
+<h2 id="与异常处理的区别"><a href="#与异常处理的区别" class="headerlink" title="与异常处理的区别"></a>与异常处理的区别</h2><p>断言与异常处理有所不同。断言是用于调试目的，用于捕获程序中的逻辑错误和不一致性。异常处理则用于处理运行时异常和错误条件。断言应该关注于程序的正确性和一致性，而异常处理则关注于程序的可靠性和健壮性。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>断言是Java中一个有用的调试工具，可以帮助开发人员捕获潜在的错误和异常。通过合理使用断言，开发人员可以更早地发现和解决问题，提高代码的质量和可靠性。然而，断言应该谨慎使用，并在生产环境中进行适当的禁用，以避免不必要的性能开销。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/11/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/11/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">设计模式总结</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-11 22:44:19 / 修改时间：23:24:19" itemprop="dateCreated datePublished" datetime="2023-05-11T22:44:19+08:00">2023-05-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>前两天终于做完软构lab3了，接下来对java中的一些设计模式做一个简单的总结。<br>首先，同样推荐一个b站up主@林斯基JI，它的设计模式讲的挺好的，距离生动形象。</p>
+<ol>
+<li><p>工厂模式（Factory Pattern）： 工厂模式用于创建对象，将对象的创建逻辑与客户端代码分离。它通过一个工厂类来创建对象，客户端只需调用工厂类的方法即可获取所需的对象。工厂模式可以根据条件返回不同的对象实例，提供了灵活性和可扩展性。</p>
+</li>
+<li><p>观察者模式（Observer Pattern）： 观察者模式定义了对象之间的一对多依赖关系，当一个对象的状态发生变化时，其依赖的对象将自动得到通知并更新。在Java中，观察者模式可以使用<code>java.util.Observer</code>接口和<code>java.util.Observable</code>类实现。</p>
+</li>
+<li><p>装饰器模式（Decorator Pattern）： 装饰器模式允许动态地向对象添加额外的功能，而不需要修改其原始类。它通过将对象包装在装饰器类中，逐层叠加功能来实现。在Java中，可以使用继承和接口来实现装饰器模式。</p>
+</li>
+<li><p>策略模式（Strategy Pattern）： 策略模式定义了一组算法，将其封装成独立的策略类，并使它们可以互相替换。客户端可以根据需求选择不同的策略，而不需要了解具体的算法实现细节。在Java中，策略模式可以通过接口和多态性来实现。</p>
+</li>
+<li><p>适配器模式（Adapter Pattern）： 适配器模式用于将一个类的接口转换成客户端所期望的另一个接口。它使得原本不兼容的类可以一起工作。适配器模式可以通过继承或组合来实现适配器类。</p>
+</li>
+<li><p>模板方法模式（Template Method Pattern）： 模板方法模式定义了一个算法的骨架，将某些步骤的具体实现延迟到子类中。它提供了一个模板方法来定义算法的框架，而具体的步骤实现由子类决定。在Java中，可以使用抽象类和钩子方法来实现模板方法模式。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/10/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E5%A7%94%E6%B4%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -862,187 +1018,10 @@ Area of square: 25
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/27/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/equals%20and%20hashcode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/27/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/equals%20and%20hashcode/" class="post-title-link" itemprop="url">equals and hashcode</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-27 16:45:14" itemprop="dateCreated datePublished" datetime="2023-03-27T16:45:14+08:00">2023-03-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-28 11:45:14" itemprop="dateModified" datetime="2023-03-28T11:45:14+08:00">2023-03-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#软件构造<br>在java中，我们经常需要判断两个对象是否相等，为了达到这个目的，往往需要重写equals方法和hashcode方法。  </p>
-<h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h2><h3 id="为什么要使用equals方法"><a href="#为什么要使用equals方法" class="headerlink" title="为什么要使用equals方法"></a>为什么要使用equals方法</h3><p>在java中我们会使用 <strong>&#x3D;=</strong> 来对int、double等基本数据类型来进行相等判断，但是不能用 <strong>&#x3D;=</strong> 对引用数据类型进行相等判断，因为 <strong>&#x3D;=</strong> 在对引用数据类型判断时是比较两个对象的内存地址，无法通过判断对象内部的属性是否相等来判断两个对象是否等价，因而我们需要使用equals方法。  </p>
-<h3 id="为什么要重写equals方法"><a href="#为什么要重写equals方法" class="headerlink" title="为什么要重写equals方法"></a>为什么要重写equals方法</h3><p>java中的所有对象都有一个默认的祖宗——我是说默认的父类，也就是Object类，所以这些对象会继承它们祖宗的equals方法，让我们来看看Object类中是怎么样实现equals方法的。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> (<span class="built_in">this</span> == obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>是的，它是直接使用 <strong>&#x3D;=</strong> 来进行比较的，自然，这样是无法满足我们的需求的，所以我们需要在自己的每一个实现类中重写equals方法，以满足判断等价的需求。  </p>
-<h3 id="为什么要重写hashcode方法"><a href="#为什么要重写hashcode方法" class="headerlink" title="为什么要重写hashcode方法"></a>为什么要重写hashcode方法</h3><p>在你不会创建类对应的散列表的时候，重写hashcode方法与否其实是无伤大雅的，毕竟你基本是不需要调用这个方法的（但是可能会违反等价的对象必须具有相等的哈希码的要求）。<br>但是，如果需要创建类对应的散列表，比如自定义类作为hashSet，hashMap等的泛型时，就一定要重写hashcode方法了。<br>hashMap的put方法，使用hashCode()用key作为参数计算出hash值，然后进行比较，如果相同，再通过equals()比较key值是否相同，如果相同，返回同一个对象。<br>而hashSet中要使用hashMap中的put方法。<br>所以这时候就需要把equals方法和hashcode方法全部重写成符合规范的样子了，否则hashSet和hashMap就可能会出现诸如出现重复元素等的问题。 </p>
-<h2 id="怎么做"><a href="#怎么做" class="headerlink" title="怎么做"></a>怎么做</h2><h3 id="怎么重写equals方法"><a href="#怎么重写equals方法" class="headerlink" title="怎么重写equals方法"></a>怎么重写equals方法</h3><p>equals方法返回true的条件是要满足等价，也就是自反、传递、对称。</p>
-<pre><code> 自反：一个对象对自身调用equals方法要得到一个true
- 传递：对象A和对象B等价，B和C等价，那么A和C也等价
- 对称：A.equals(B) == true，那么A和B等价
-</code></pre>
-<p>此外，还要满足不会对对象作出改变，一个对象对另一个对象多次调用equals方法应得到相同的结果。</p>
-<p>从而给出一般的equals方法写法：</p>
-<ol>
-<li>显示参数命名为 otherObject，稍后会将它转换成另一个叫做 other 的变量。(名字怎样都好，没什么所谓的)。</li>
-<li>判断比较的两个对象引用是否相等，如果引用相等那么表示是同一个对象，那么当然相等。</li>
-<li>如果 otherObject 为 null，直接返回false，表示不相等。</li>
-<li>比较 this 和 otherObject 是否是同一个类：如果 equals 的语义在每个子类中有所改变，就使用 getClass 检测；如果所有的子类都有统一的定义，那么使用 instanceof 检测。</li>
-<li>将 otherObject 转换成对应的类类型变量。</li>
-<li>最后对对象的属性进行比较。使用 &#x3D;&#x3D; 比较基本类型，使用 equals 比较对象。如果都相等则返回true，否则返回false。注意如果是在子类中定义equals，则要包含 super.equals(other)。</li>
-</ol>
-<p>给出两个例子，一个是java自带的包装类String中重写的equals方法，另一个是自己的实现类中重写的equals方法。 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// String类</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object anObject)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span> == anObject) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (anObject <span class="keyword">instanceof</span> String) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">anotherString</span> <span class="operator">=</span> (String)anObject;</span><br><span class="line">            <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> value.length;</span><br><span class="line">            <span class="keyword">if</span> (n == anotherString.value.length) &#123;</span><br><span class="line">                <span class="type">char</span> v1[] = value;</span><br><span class="line">                <span class="type">char</span> v2[] = anotherString.value;</span><br><span class="line">                <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (v1[i] != v2[i])</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Person类</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span> &#123;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">this</span> == obj)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(obj == <span class="literal">null</span> || getClass() != obj.getClass())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> (Person) obj;</span><br><span class="line">        <span class="keyword">if</span>(person.getName() == <span class="literal">null</span> | name == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> name.equalsIgnoreCase(person.getName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="怎么重写hashcode方法"><a href="#怎么重写hashcode方法" class="headerlink" title="怎么重写hashcode方法"></a>怎么重写hashcode方法</h3><p>按照hashCode方法的规约重写即可</p>
-<ol>
-<li>如果两个对象通过equals方法比较是相等的，那么它们的hashCode方法结果值也是相等的。</li>
-<li>如果两个对象通过equals方法比较是不相等的，那么不要求它们的hashCode方法结果值是相等的。</li>
-<li>当在一个应用程序执行过程中， 如果equals方法比较中没有修改任何信息，那么在同一个对象上重复调用hashCode方法时，它必须始终返回相同的值。但如果从一个应用程序到了另一个应用程序，两个应用程序汇中调用hashCode方法的返回值可以是不一致的。</li>
-</ol>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说，虽然查资料了解了这些东西，但实际上在写的时候基本还是会用Idea一键生成的（最多对equals方法的细节做一下修改，以及把它改成更符合我审美的代码。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/14/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E6%9C%80%E5%B0%8F%E5%87%B8%E5%8C%85%E9%9B%86%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/14/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E6%9C%80%E5%B0%8F%E5%87%B8%E5%8C%85%E9%9B%86%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">最小凸包集</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-03-14 16:12:25 / 修改时间：16:56:23" itemprop="dateCreated datePublished" datetime="2023-03-14T16:12:25+08:00">2023-03-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#软件构造<br>2023&#x2F;3&#x2F;14<br>在完成软件构造lab1的过程中，遇到的最大的困难是最小凸包集问题，通过查资料学习了这个问题的几种算法，在这里记录一下。</p>
-<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>用直线段顺序连接平面上的点，P1，…，Pn构成的封闭曲线称为一个多边形，Pi称为多边形的顶点，线段PiPi+1称为多边形的边。边中任意不相邻的顶点之间的连线称为多边形的弦。如果多边形的任意一条弦均位于多边形内部，则称该多边形是凸多边形。平面上n个点P1，…，Pn的凸包是使得P1，…，Pn位于其边界或内部的最小凸多边形。<br><strong>凸包问题：</strong><br><strong>输入：</strong> 平面上n个点构成的集合S&#x3D;{(xi,yi)|xi,yi∈<em>R</em>,1≤i≤n}<br><strong>输出：</strong> 以逆时针顺序输出S的凸包顶点  </p>
-<h2 id="求解算法"><a href="#求解算法" class="headerlink" title="求解算法"></a>求解算法</h2><h3 id="1-暴力算法"><a href="#1-暴力算法" class="headerlink" title="1.暴力算法"></a>1.暴力算法</h3><h4 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h4><p>先用排除法确定凸包的顶点，也就是逐步删除不是凸包顶点的输入点，然后按逆时针顺序输入这些顶点即可。<br>使用两点确定一条直线，如果剩余的其他点都在这条直线的同一侧，则这两个点是凸包上的点，否则就不是。<br>至于如何判断剩余的其他点是否在这条直线的同一侧，可以使用叉乘的方法。  </p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>对于暴力算法，仅附上伪代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">输入 :平面上n个点的集合Q</span><br><span class="line">输出 :CH(Q)，Q的凸包</span><br><span class="line">1: For ∀A,B,C,D∈Q Do</span><br><span class="line">2: If D位于ABC组成的三角形内(根据面积判定)</span><br><span class="line">3: Then 从Q中删除该点</span><br><span class="line">4: A←Q中横坐标最大的点</span><br><span class="line">5: B←Q中横坐标最小的点</span><br><span class="line">6: SL←&#123;P|P∈Q且P位于AB直线的下方&#125;</span><br><span class="line">7: SU←&#123;P|P∈Q且P位于AB直线的上方&#125;</span><br><span class="line">8: 对SL和SU分别升序排序</span><br><span class="line">9: 输出A, SL, B, 逆序SU</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-Graham扫描算法"><a href="#2-Graham扫描算法" class="headerlink" title="2.Graham扫描算法"></a>2.Graham扫描算法</h3><h4 id="基本思想-1"><a href="#基本思想-1" class="headerlink" title="基本思想"></a>基本思想</h4><p>首先找到纵坐标最小的点，这个点肯定是凸包中的点，然后从这个点开始按极角扫描所有的输入点，并判断是否在凸包中，直至扫描到左下侧。  </p>
-<h4 id="算法步骤"><a href="#算法步骤" class="headerlink" title="算法步骤"></a>算法步骤</h4><ol>
-<li>把所有点放在二维坐标系中，则纵坐标最小的点一定是凸包上的点，记为P0</li>
-<li>计算各个点相对于P 0 P 0P0的幅角 α ，按从小到大的顺序对各个点排序。当 α 相同时，距离P0比较近的排在前面。我们由几何知识可以知道，结果中第一个点P1和最后一个点一定是凸包上的点。</li>
-<li>以上，我们已经知道了凸包上的第一个点P0和第二个点P1，我们把它们放在栈里面。现在从步骤2求得的那个结果里，把P1后面的那个点拿出来做当前点，即P2。接下来开始找第三个点。</li>
-<li>连接栈最上面的两个元素，得到直线L。看当前点是在直线L的右边还是左边。如果在直线的右边就执行步骤5；如果在直线上，或者在直线的左边就执行步骤6。</li>
-<li>如果在右边，则栈顶的那个元素不是凸包上的点，把栈顶元素出栈。执行步骤4。</li>
-<li>当前点是凸包上的点，把它压入栈，执行步骤7。</li>
-<li>检查当前的点是不是步骤2那个结果的最后一个元素。是最后一个元素的话就结束。如果不是的话就把当前点后面那个点做当前点，返回步骤4。</li>
-<li>最后，栈中的元素就是凸包上的点了。</li>
-</ol>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">convexHull</span> &#123;</span><br><span class="line">	<span class="comment">/**  </span></span><br><span class="line"><span class="comment">	 * Given a set of points, compute the convex hull, the smallest convex set that contains all the points * in a set of input points. The gift-wrapping algorithm is one simple approach to this problem, and   </span></span><br><span class="line"><span class="comment">	 * there are other algorithms too.  </span></span><br><span class="line"><span class="comment">	 ** <span class="doctag">@param</span> points a set of points with xCoords and yCoords. It might be empty, contain only 1 point, two points or more.  </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> minimal subset of the input points that form the vertices of the perimeter of the convex hull  </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	 <span class="keyword">public</span> <span class="keyword">static</span> Set&lt;Point&gt; <span class="title function_">convexHull</span><span class="params">(Set&lt;Point&gt; points)</span> &#123;  </span><br><span class="line">	    <span class="comment">// 若只有三个点，则这三个点就是它们的凸包(不考虑三点共线情况)  </span></span><br><span class="line">	    <span class="keyword">if</span>(points.size() &lt;= <span class="number">3</span>) &#123;  </span><br><span class="line">	        <span class="keyword">return</span> points;  </span><br><span class="line">	    &#125;  </span><br><span class="line">	    ArrayList&lt;Point&gt; pointList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();  </span><br><span class="line">	  </span><br><span class="line">	    <span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> -<span class="number">1</span>;  </span><br><span class="line">	    <span class="comment">// 找出坐标最小的点，也就是极点，直观上就是二维坐标系中位于最左下角的点  </span></span><br><span class="line">	    <span class="keyword">for</span> (Point p: points) &#123;  </span><br><span class="line">	        pointList.add(p);  </span><br><span class="line">	        <span class="keyword">if</span>(-<span class="number">1</span> == index) &#123;  </span><br><span class="line">	            index = <span class="number">0</span>;  </span><br><span class="line">	        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">	            <span class="type">Point</span> <span class="variable">miny</span> <span class="operator">=</span> pointList.get(index);  </span><br><span class="line">	            <span class="keyword">if</span> (p.y() &lt; miny.y() || (p.y() == miny.y() &amp;&amp; p.x() &lt; miny.x())) &#123;  </span><br><span class="line">	                <span class="comment">// index 记录当前极点的下标  </span></span><br><span class="line">	                index = pointList.size() - <span class="number">1</span>;  </span><br><span class="line">	            &#125;  </span><br><span class="line">	        &#125;  </span><br><span class="line">	    &#125;  </span><br><span class="line">	  </span><br><span class="line">	    <span class="comment">// 极点  </span></span><br><span class="line">	    <span class="type">Point</span> <span class="variable">base</span> <span class="operator">=</span> pointList.get(index);  </span><br><span class="line">	  </span><br><span class="line">	    <span class="comment">// 按极角排序  </span></span><br><span class="line">	    <span class="comment">// 实现Comparator接口的sort方法  </span></span><br><span class="line">	    pointList.sort((A, B) -&gt; &#123;  </span><br><span class="line">	        <span class="keyword">if</span>(A.x() == base.x() &amp;&amp; A.y() == base.y()) <span class="keyword">return</span> -<span class="number">1</span>;  </span><br><span class="line">	        <span class="keyword">if</span>(B.x() == base.x() &amp;&amp; B.y() == base.y()) <span class="keyword">return</span> <span class="number">1</span>;  </span><br><span class="line">	  </span><br><span class="line">	        <span class="type">double</span> <span class="variable">crossVal</span> <span class="operator">=</span> cross(base, A, B);  </span><br><span class="line">	        <span class="keyword">if</span>(crossVal == <span class="number">0</span>) &#123;  </span><br><span class="line">	            <span class="comment">// 若极角相等，则离极点距离小者排在前面  </span></span><br><span class="line">	            <span class="keyword">if</span>(dist(base, A) &lt; dist(base, B)) &#123;  </span><br><span class="line">	                <span class="keyword">return</span> -<span class="number">1</span>;  </span><br><span class="line">	            &#125;  </span><br><span class="line">	            <span class="comment">// 若两者距离也相等，则默认把B排在前面  </span></span><br><span class="line">	            <span class="keyword">return</span> <span class="number">1</span>;  </span><br><span class="line">	        &#125;  </span><br><span class="line">	        <span class="comment">// 若叉乘大于零，A排在B的前面  </span></span><br><span class="line">	        <span class="keyword">if</span>(crossVal &gt; <span class="number">0</span>) <span class="keyword">return</span> -<span class="number">1</span>;  </span><br><span class="line">	        <span class="comment">// 否则，B排在A的前面  </span></span><br><span class="line">	        <span class="keyword">return</span> <span class="number">1</span>;  </span><br><span class="line">	    &#125;);  </span><br><span class="line">	  </span><br><span class="line">	    <span class="comment">// 接下来开始去除凸包中多余的点  </span></span><br><span class="line">	    <span class="type">int</span> <span class="variable">ptr</span> <span class="operator">=</span> pointList.size() - <span class="number">1</span>;  </span><br><span class="line">	    <span class="comment">// 确定最后共线的点  </span></span><br><span class="line">	    <span class="keyword">while</span>(ptr &gt;= <span class="number">0</span> &amp;&amp; cross(base, pointList.get(pointList.size() - <span class="number">1</span>), pointList.get(ptr)) == <span class="number">0</span>) &#123;  </span><br><span class="line">	        ptr--;  </span><br><span class="line">	    &#125;  </span><br><span class="line">	    <span class="comment">// 将它们反转  </span></span><br><span class="line">	    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">p</span> <span class="operator">=</span> ptr + <span class="number">1</span>, q = pointList.size() - <span class="number">1</span>; p &lt; q; p++, q--) &#123;  </span><br><span class="line">	        swap(pointList, p, q);  </span><br><span class="line">	    &#125;  </span><br><span class="line">	    <span class="comment">// 移除最近的点  </span></span><br><span class="line">	    <span class="keyword">while</span>(pointList.size() &gt; ptr + <span class="number">2</span>) &#123;  </span><br><span class="line">	        pointList.remove(pointList.size() - <span class="number">1</span>);  </span><br><span class="line">	    &#125;  </span><br><span class="line">	  </span><br><span class="line">	    Stack&lt;Point&gt; S = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;&gt;();  </span><br><span class="line">	  </span><br><span class="line">	    S.push(pointList.get(<span class="number">0</span>));  </span><br><span class="line">	    S.push(pointList.get(<span class="number">1</span>));  </span><br><span class="line">	  </span><br><span class="line">	    <span class="comment">// 开始计算最小凸包集  </span></span><br><span class="line">	    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt; pointList.size(); i++) &#123;  </span><br><span class="line">	        <span class="keyword">while</span>(S.size() &gt;= <span class="number">2</span>) &#123;  </span><br><span class="line">	            <span class="type">Point</span> <span class="variable">top</span> <span class="operator">=</span> S.pop();  </span><br><span class="line">	            <span class="type">Point</span> <span class="variable">nextTop</span> <span class="operator">=</span> S.peek();  </span><br><span class="line">	            <span class="keyword">if</span>(cross(nextTop, top, pointList.get(i)) &gt; <span class="number">0</span>) &#123;  </span><br><span class="line">	                S.push(top);  </span><br><span class="line">	                <span class="keyword">break</span>;  </span><br><span class="line">	            &#125;  </span><br><span class="line">	        &#125;  </span><br><span class="line">	        S.push(pointList.get(i));  </span><br><span class="line">	    &#125;  </span><br><span class="line">	  </span><br><span class="line">	    <span class="comment">// 返回最小凸包集  </span></span><br><span class="line">	    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;(S);  </span><br><span class="line">	&#125;  </span><br><span class="line">  </span><br><span class="line">	<span class="comment">/**  </span></span><br><span class="line"><span class="comment">	* 计算两点间的距离  </span></span><br><span class="line"><span class="comment">	* <span class="doctag">@param</span> A 第一个点  </span></span><br><span class="line"><span class="comment">	* <span class="doctag">@param</span> B 第二个点  </span></span><br><span class="line"><span class="comment">	* <span class="doctag">@return</span> 两点间的距离  </span></span><br><span class="line"><span class="comment">	*/</span>  </span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="type">double</span> <span class="title function_">dist</span><span class="params">(Point A, Point B)</span> &#123;  </span><br><span class="line">	    <span class="type">double</span> <span class="variable">deltaX</span> <span class="operator">=</span> B.x() - A.x();  </span><br><span class="line">	    <span class="type">double</span> <span class="variable">deltaY</span> <span class="operator">=</span> B.y() - A.y();  </span><br><span class="line">	    <span class="keyword">return</span> Math.sqrt(deltaX * deltaX + deltaY * deltaY);  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="3-分治算法"><a href="#3-分治算法" class="headerlink" title="3.分治算法"></a>3.分治算法</h3><h4 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h4><p><strong>划分：</strong> 图中最左下角和右上角的点一定在凸包中，用这两个点连成的直线将点集分成两个子集。<br><strong>递归求解：</strong> 递归调用算法求得两个子集的凸包。递归过程中，如果子问题中点的个数小于等于3，则直接计算三个点的凸包。<br><strong>合并：</strong> 将凸包CH(S(L))和CH(S(R))合并为父问题的解。  </p>
-<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><p>参照<a target="_blank" rel="noopener" href="https://wang-qp.github.io/2020/10/01/%E5%87%B8%E5%8C%85%E7%AE%97%E6%B3%95%EF%BC%88%E5%88%86%E6%B2%BB%EF%BC%89/">凸包算法（分治） | WQP (wang-qp.github.io)</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1108,12 +1087,12 @@ Area of square: 25
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">32</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
