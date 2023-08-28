@@ -147,6 +147,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/10/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E5%A7%94%E6%B4%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/10/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E5%A7%94%E6%B4%BE/" class="post-title-link" itemprop="url">委派</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-10 22:44:00" itemprop="dateCreated datePublished" datetime="2023-05-10T22:44:00+08:00">2023-05-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-11 08:11:23" itemprop="dateModified" datetime="2023-05-11T08:11:23+08:00">2023-05-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>在Java开发中，设计模式是一种重要的概念，它们提供了一套经过验证的解决方案，用于解决常见的软件设计问题。委派模式是一种常见的设计模式，它允许对象通过将任务委派给其他对象来实现代码重用和灵活性。本文将深入探讨Java中的委派模式，介绍它的概念、工作原理以及常见的使用场景。</p>
+<p>委派模式是一种对象行为模式，其中一个对象（称为委派者）将任务委派给其他对象（称为被委派者）来执行。委派者负责分发任务，并且不处理任务的具体实现细节。被委派者实际上执行任务，并返回结果给委派者。委派模式可以在运行时动态地选择被委派者，从而实现灵活的任务处理。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>当委派者接收到任务时，它根据一定的条件或策略选择合适的被委派者来执行任务。委派者本身不处理任务，它只负责分派和协调工作。被委派者实际上执行任务，并返回结果给委派者，然后委派者将结果返回给调用者。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>Strategy设计模式：委派模式可以用于实现任务调度器，其中委派者根据不同的条件将任务委派给不同的处理器。</li>
+<li>visitor设计模式：委派模式可以用于处理事件，其中委派者将事件委派给适当的处理器来执行相应的操作。</li>
+<li>plugin设计模式：委派模式可以用于插件系统，其中委派者负责将任务委派给适当的插件来执行特定的功能。</li>
+</ul>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>一个常见的使用委派模式的实例是Java Servlet中的请求调度器（RequestDispatcher）。Servlet是Java Web应用程序的基本组件，用于处理客户端的HTTP请求并生成响应。</p>
+<p>在Servlet中，请求调度器充当委派者的角色，负责将请求转发给适当的处理器（被委派者）进行处理。请求调度器根据请求的特征或路由规则，将请求委派给正确的Servlet或其他处理器进行处理。这样，请求调度器实现了请求的分发和协调，而不需要处理请求的具体实现细节。</p>
+<p>以下是一个简单的示例，演示了使用委派模式的Java Servlet请求调度器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.*;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RequestDispatcherExample</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest request, HttpServletResponse response)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">page</span> <span class="operator">=</span> request.getParameter(<span class="string">&quot;page&quot;</span>);</span><br><span class="line"></span><br><span class="line">        RequestDispatcher dispatcher;</span><br><span class="line">        <span class="keyword">if</span> (page.equals(<span class="string">&quot;home&quot;</span>)) &#123;</span><br><span class="line">            dispatcher = request.getRequestDispatcher(<span class="string">&quot;/homeServlet&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (page.equals(<span class="string">&quot;profile&quot;</span>)) &#123;</span><br><span class="line">            dispatcher = request.getRequestDispatcher(<span class="string">&quot;/profileServlet&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            dispatcher = request.getRequestDispatcher(<span class="string">&quot;/errorServlet&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        dispatcher.forward(request, response);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上述示例中，<code>doGet()</code>方法接收客户端的HTTP请求，并根据请求中的参数<code>page</code>来确定应该委派给哪个具体的Servlet进行处理。根据不同的<code>page</code>值，请求调度器将请求转发给对应的Servlet，通过<code>getRequestDispatcher()</code>方法获取相应的<code>RequestDispatcher</code>对象，然后使用<code>forward()</code>方法将请求和响应对象转发给被委派的Servlet进行处理。</p>
+<p>通过请求调度器的使用，Servlet实现了请求的分派和协调，将具体的请求处理委派给适当的处理器。这种委派模式的应用可以使代码更加模块化和可扩展，提高了Web应用程序的灵活性和可维护性。</p>
+<h2 id="与继承的比较"><a href="#与继承的比较" class="headerlink" title="与继承的比较"></a>与继承的比较</h2><p>委派模式和继承都可以实现代码重用，但它们的目的和机制有所不同。委派模式强调任务的分派和协调，它将任务委派给其他对象来执行。而继承是一种面向对象编程的基本概念，它允许一个类继承另一个类的属性和方法。继承用于实现类之间的层次关系和共享代码，但它通常会导致紧耦合的设计，难以灵活地改变行为。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>委派模式是一种在Java开发中常见且有用的设计模式，它提供了一种灵活的方式来实现代码的重用和任务的分派。通过委派模式，我们可以将任务委派给不同的对象，并实现代码的解耦和灵活性。了解委派模式的概念和使用场景，可以帮助我们在软件设计中更好地选择合适的模式，并编写可维护和可扩展的代码。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/03/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/Liskov%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1028,7 +1108,7 @@ Area of square: 25
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

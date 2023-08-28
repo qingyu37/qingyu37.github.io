@@ -147,6 +147,78 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84%20%E5%AD%97%E7%AC%A6%E4%B8%B2/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84%20%E5%AD%97%E7%AC%A6%E4%B8%B2/%E5%A4%9A%E6%95%B0%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-28 10:41:37 / 修改时间：10:59:05" itemprop="dateCreated datePublished" datetime="2023-08-28T10:41:37+08:00">2023-08-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="多数元素"><a href="#多数元素" class="headerlink" title="多数元素"></a>多数元素</h1><hr>
+<p>title: 多数元素<br>date: 2023-08-28<br>tags: 力扣-面试150</p>
+<hr>
+<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个大小为 n 的数组 nums ，返回其中的多数元素。多数元素是指在数组中出现次数 大于 ⌊ n&#x2F;2 ⌋ 的元素。</p>
+<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h2 id="方法一：哈希法"><a href="#方法一：哈希法" class="headerlink" title="方法一：哈希法"></a>方法一：哈希法</h2><p>我的第一反应是使用哈希表把每个数和对应的出现次数存放在哈希表中，当出现一个次数大于 ⌊ n&#x2F;2 ⌋ 的元素时就将它返回。勉强完成了题目，但是时间不是很理想。虽然时间复杂度也达到了 O(n)，但是大量的哈希查询浪费了时间。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">majorityElement</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> nums.length;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        Map&lt;Integer, Integer&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="type">int</span> <span class="variable">maxCount</span> <span class="operator">=</span> <span class="number">1</span>, ans = nums[<span class="number">0</span>];</span><br><span class="line">        map.put(nums[<span class="number">0</span>], <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(nums[i])) &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> map.get(nums[i]) + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">if</span> (num &gt; n / <span class="number">2</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> nums[i];</span><br><span class="line">                &#125;</span><br><span class="line">                map.put(nums[i], num);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                map.put(nums[i], <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法二：摩尔投票法"><a href="#方法二：摩尔投票法" class="headerlink" title="方法二：摩尔投票法"></a>方法二：摩尔投票法</h2><p>候选人(candNum)初始化为 num[0]，票数(count)初始化为 1，每当碰到与候选人相同的数字时票数加1，否则票数减1，票数为0时更换候选人，并将票数重置为1，遍历一次数组，结束时的 candNum 即为多数。</p>
+<p><strong>正确性：</strong><br>多数元素的数量大于 ⌊ n&#x2F;2 ⌋，也就是说，多数元素的个数减去其他元素的总和仍然 &gt;&#x3D; 1。</p>
+<p>代码如下；</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">majorityElement</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">candNum</span> <span class="operator">=</span> nums[<span class="number">0</span>], count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[i] == candNum) &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                count--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (count == <span class="number">0</span>) &#123;</span><br><span class="line">                candNum = nums[i];</span><br><span class="line">                count = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> candNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>摩尔投票法感觉是一个很神奇的思路，很好玩儿。不过看官方题解给出了一种同样很好玩儿的方法：随机化。大概的思路就是每次从数组中随机选一个数，检查它是否是多数，如果是就返回，否则就再选一个数重复。这个方法的依据在于多数占据了总数目的一半以上，因此能够使期望时间达到线性以内，具体代码就不写了，贴个链接：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/majority-element/solutions/146074/duo-shu-yuan-su-by-leetcode-solution/?envType=study-plan-v2&envId=top-interview-150">https://leetcode.cn/problems/majority-element/solutions/146074/duo-shu-yuan-su-by-leetcode-solution/?envType=study-plan-v2&amp;envId=top-interview-150</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E5%8F%8C%E6%8C%87%E9%92%88/%E5%88%A4%E6%96%AD%E5%AD%90%E5%BA%8F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -226,7 +298,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9%E2%85%A1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84%20%E5%AD%97%E7%AC%A6%E4%B8%B2/%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9%E2%85%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -240,7 +312,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9%E2%85%A1/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84%20%E5%AD%97%E7%AC%A6%E4%B8%B2/%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9%E2%85%A1/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta">
@@ -304,7 +376,7 @@ for (int i = 0; i &lt; len; i++) &#123;
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84%20%E5%AD%97%E7%AC%A6%E4%B8%B2/%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -318,7 +390,7 @@ for (int i = 0; i &lt; len; i++) &#123;
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84%20%E5%AD%97%E7%AC%A6%E4%B8%B2/%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta">
@@ -376,7 +448,7 @@ for (int i = 0; i &lt; len; i++) &#123;
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/25/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/25/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84%20%E5%AD%97%E7%AC%A6%E4%B8%B2/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -390,7 +462,7 @@ for (int i = 0; i &lt; len; i++) &#123;
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/25/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2023/08/25/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84%20%E5%AD%97%E7%AC%A6%E4%B8%B2/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta">
@@ -608,7 +680,7 @@ for (int i = 0; i &lt; len; i++) &#123;
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84%20%E5%AD%97%E7%AC%A6%E4%B8%B2/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -622,7 +694,7 @@ for (int i = 0; i &lt; len; i++) &#123;
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84%20%E5%AD%97%E7%AC%A6%E4%B8%B2/%E5%90%88%E5%B9%B6%E4%B8%A4%E4%B8%AA%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">未命名</a>
         </h2>
 
         <div class="post-meta">
@@ -855,100 +927,6 @@ for (int i = 0; i &lt; len; i++) &#123;
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/03/spring/springMVC/SpringMVC%E7%BB%84%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/03/spring/springMVC/SpringMVC%E7%BB%84%E4%BB%B6/" class="post-title-link" itemprop="url">SpringMVC组件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-03 20:14:45 / 修改时间：21:28:42" itemprop="dateCreated datePublished" datetime="2023-07-03T20:14:45+08:00">2023-07-03</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-Spring的执行流程"><a href="#1-Spring的执行流程" class="headerlink" title="1. Spring的执行流程"></a>1. Spring的执行流程</h2><ol>
-<li>用户发送请求至前端控制器DispatcherServlet</li>
-<li>DispatcherServlet收到请求调用HandleMapping处理器映射器</li>
-<li>处理器映射器找到具体的处理器（可以根据xml配置、注解进行查找），生成处理器对象及处理器拦截器（如果有），一并返回给DispatcherServlet</li>
-<li>DispatcherServlet调用HandleAdapter处理器适配器</li>
-<li>HandleAdapter经过适配调用具体的处理器（Controller，也叫后端控制器）</li>
-<li>Controller执行完成返回ModelAndView</li>
-<li>HandlerAdapter将controller执行结果ModelAndView返回给DispatcherServlet</li>
-<li>DispatcherServlet将ModelAndView传给ViewReslover视图解析器</li>
-<li>ViewReslover解析后返回具体View</li>
-<li>DispatcherServlet根据View进行渲染视图（即将模型数据填充至视图中），DispatcherServlet响应用户</li>
-</ol>
-<h2 id="2-SpringMVC注解解析"><a href="#2-SpringMVC注解解析" class="headerlink" title="2. SpringMVC注解解析"></a>2. SpringMVC注解解析</h2><p><strong>@RequsetMapping</strong></p>
-<ul>
-<li>作用：用于建立请求URL和处理请求方法之间的对应关系</li>
-<li>位置：<ul>
-<li>类上，请求URL的第一级访问目录。此处不写的话，就相当于应用的根目录</li>
-<li>方法上，请求URL的第二级访问目录，与类上的使用@RequestMapping标注的一级目录一起组成访问虚拟路径属性</li>
-<li>value：用于指定请求的URL，它和path属性的作用一样</li>
-<li>method：用于指定请求的方式</li>
-<li>params：用于指定限制请求参数的条件，它支持简单的表达式，要求请求参数的key和value必须和配置的一模一样，例如：<ul>
-<li>params：{“accountName”}，表示请求参数必须有accountName</li>
-<li>params：{“moeny!100”}，表示请求参数中money不能是100</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>mvc命名空间引入<ul>
-<li>命名空间：xmlns:context&#x3D;”<a target="_blank" rel="noopener" href="http://www.springframework.org/schema/context">http://www.springframework.org/schema/context</a>“ xmlns:mvc&#x3D;”<a target="_blank" rel="noopener" href="http://www.springframework.org/schema/mvc">http://www.springframework.org/schema/mvc</a>“ </li>
-<li>约束地址：”<a target="_blank" rel="noopener" href="http://www.springframework.org/schema/context">http://www.springframework.org/schema/context</a>“ “<a target="_blank" rel="noopener" href="http://www.springframework.org/schema/context/spring-context.xsd">http://www.springframework.org/schema/context/spring-context.xsd</a>“ “<a target="_blank" rel="noopener" href="http://www.springframework.org/schema/mvc">http://www.springframework.org/schema/mvc</a>“ “<a target="_blank" rel="noopener" href="http://www.springframework.org/schema/mvc/spring-mvc.xsd">http://www.springframework.org/schema/mvc/spring-mvc.xsd</a>“</li>
-</ul>
-</li>
-<li>组件扫描<br>SpringMVC基于Spring容器，所以在进行SpringMVC操作时，需要将Controller存储到Spring容器中，如果使用@Controller注解标注的话，就需要使用&lt;context:component-scan base-package&#x3D;”com.xxx.controller”&#x2F;&gt;进行组件扫描</li>
-</ol>
-<h2 id="3-SpringMVC的XML配置解析"><a href="#3-SpringMVC的XML配置解析" class="headerlink" title="3. SpringMVC的XML配置解析"></a>3. SpringMVC的XML配置解析</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1018,7 +996,7 @@ for (int i = 0; i &lt; len; i++) &#123;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
