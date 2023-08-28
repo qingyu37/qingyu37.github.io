@@ -147,6 +147,129 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/28/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E5%88%A0%E9%99%A4%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E9%87%8D%E5%A4%8D%E9%A1%B9/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-28 09:53:39 / 修改时间：09:53:44" itemprop="dateCreated datePublished" datetime="2023-08-28T09:53:39+08:00">2023-08-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/25/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/08/25/%E5%8A%9B%E6%89%A3/150/%E6%95%B0%E7%BB%84/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-25 22:18:17 / 修改时间：22:23:59" itemprop="dateCreated datePublished" datetime="2023-08-25T22:18:17+08:00">2023-08-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="移除元素"><a href="#移除元素" class="headerlink" title="移除元素"></a>移除元素</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">说明:</span><br><span class="line"></span><br><span class="line">为什么返回数值是整数，但输出的答案是数组呢?</span><br><span class="line"></span><br><span class="line">请注意，输入数组是以「引用」方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</span><br><span class="line"></span><br><span class="line">你可以想象内部操作如下:</span><br><span class="line"></span><br><span class="line">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝</span><br><span class="line">int len = removeElement(nums, val);</span><br><span class="line"></span><br><span class="line">// 在函数里修改输入数组对于调用者是可见的。</span><br><span class="line">// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。</span><br><span class="line">for (int i = 0; i &lt; len; i++) &#123;</span><br><span class="line">    print(nums[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><h3 id="方法一：双指针法"><a href="#方法一：双指针法" class="headerlink" title="方法一：双指针法"></a>方法一：双指针法</h3><p>使用双指针法，分别指向数组头和尾，每次头指针指向 val 值时，令头指针所指变成尾指针的值，如果仍为 val 值，则将尾指针向前移动一位，继续令头指针所指变成尾指针的值，直到与 val 值不相等。在头尾指针相遇之后结束循环，此时头指针的大小即为新数组的长度。</p>
+<p>代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int removeElement(int[] nums, int val) &#123;</span><br><span class="line">        int i = 0, j = nums.length;</span><br><span class="line">        while (i &lt; j) &#123;</span><br><span class="line">            if (nums[i] == val) &#123;</span><br><span class="line">                nums[i] = nums[j - 1];</span><br><span class="line">                j--;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/24/%E5%8A%9B%E6%89%A3/150/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -753,233 +876,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/01/spring/Spring/Spring%E6%95%B4%E5%90%88Junit/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/07/01/spring/Spring/Spring%E6%95%B4%E5%90%88Junit/" class="post-title-link" itemprop="url">Spring整合Junit</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-07-01 20:44:16 / 修改时间：20:50:53" itemprop="dateCreated datePublished" datetime="2023-07-01T20:44:16+08:00">2023-07-01</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-原始Junit测试Spring的问题"><a href="#1-原始Junit测试Spring的问题" class="headerlink" title="1. 原始Junit测试Spring的问题"></a>1. 原始Junit测试Spring的问题</h2><p>在测试类中，每个测试方法都有以下两行代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext app = new        AnnotationConfigApplicationContext(SpringConfiguration.class);  </span><br><span class="line">UserService userService = app.getBean(UserService.class);</span><br></pre></td></tr></table></figure>
-<p>它的作用是获取容器，如果不写的话， 会提示空指针异常</p>
-<h2 id="2-解决思路"><a href="#2-解决思路" class="headerlink" title="2. 解决思路"></a>2. 解决思路</h2><ul>
-<li>让SpringJuint负责创建Spring容器，但需要将配置文件的名称告诉它</li>
-<li>将需要进行测试的Bean直接在测试类中进行注入</li>
-</ul>
-<h2 id="3-Spring集成Junit步骤"><a href="#3-Spring集成Junit步骤" class="headerlink" title="3. Spring集成Junit步骤"></a>3. Spring集成Junit步骤</h2><ol>
-<li>导入Spring集成Junit的坐标</li>
-<li>使用@Runwith注解替换原来的运行期</li>
-<li>使用@ContextConfiguration指定配置文件或配置类</li>
-<li>使用@Autowired注入需要测试的对象</li>
-<li>创建测试方法进行测试</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/30/spring/Spring/Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/30/spring/Spring/Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">Spring注解开发</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-30 23:40:23" itemprop="dateCreated datePublished" datetime="2023-06-30T23:40:23+08:00">2023-06-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-07-01 20:43:48" itemprop="dateModified" datetime="2023-07-01T20:43:48+08:00">2023-07-01</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-Spring原始注解"><a href="#1-Spring原始注解" class="headerlink" title="1. Spring原始注解"></a>1. Spring原始注解</h2><p>Spring是轻代码而重配置的框架，配置比较繁重，影响开发效率， 所以注解开发是一种趋势，注解代替xml配置文件可以简化配置，提高开发效率<br>Spring原始注解主要是替代&lt;Bean&gt;的配置</p>
-<table>
-<thead>
-<tr>
-<th align="center">注解</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">@Component</td>
-<td align="center">使用在类上用于实例化Bean</td>
-</tr>
-<tr>
-<td align="center">@Controller</td>
-<td align="center">使用在web层类上用于实例化Bean</td>
-</tr>
-<tr>
-<td align="center">@Service</td>
-<td align="center">使用在service层类上用于实例化Bean</td>
-</tr>
-<tr>
-<td align="center">@Repository</td>
-<td align="center">使用在dao层类上用于实例化Bean</td>
-</tr>
-<tr>
-<td align="center">@Autowired</td>
-<td align="center">使用在字段上用于根据类型依赖注入</td>
-</tr>
-<tr>
-<td align="center">@Qualifier</td>
-<td align="center">结合@Autowired一起使用用于根据名称进行依赖注入</td>
-</tr>
-<tr>
-<td align="center">@Resource</td>
-<td align="center">相当于@Autowired+@Qualifier，按照名称进行注入</td>
-</tr>
-<tr>
-<td align="center">@Value</td>
-<td align="center">注入普通属性</td>
-</tr>
-<tr>
-<td align="center">@Scope</td>
-<td align="center">标注Bean的作用范围</td>
-</tr>
-<tr>
-<td align="center">@PostConstruce</td>
-<td align="center">使用在方法上标注该方法是Bean的初始化方法</td>
-</tr>
-<tr>
-<td align="center">@PreDestroy</td>
-<td align="center">使用在方法上标注该方法是Bean的销毁方法</td>
-</tr>
-</tbody></table>
-<p><em>使用注解进行开发时，需要在applicationContext.xml中配置组件扫描，作用是指定哪个包及其子包下的Bean需要进行扫描以便识别注解配置的类、字段和方法</em></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package=&quot;com.xjy&quot;&gt;&lt;/context:component-scan&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-Spring新注解"><a href="#2-Spring新注解" class="headerlink" title="2. Spring新注解"></a>2. Spring新注解</h2><p>使用上面的注解不能全部替代xml配置文件，还需要使用注解替代的配置如下：</p>
-<ul>
-<li>非自定义的Bean的配置：&lt;bean&gt;</li>
-<li>加载properties文件的配置：&lt;context:property-placeholder&gt;</li>
-<li>组件扫描的配置：&lt;context:component-scan&gt;</li>
-<li>引入其他文件：&lt;import&gt;</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">注解</th>
-<th align="center">说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">@Configuration</td>
-<td align="center">用于指定当前类是一个Spring配置类，当创建容器时会从该类上加载注解</td>
-</tr>
-<tr>
-<td align="center">@ComponentScan</td>
-<td align="center">用于指定Spring在初始化容器时要扫描的包，作用和在Spring的xml配置文件中的&lt;context:component-scan base-package&#x3D;”com.xjy”&#x2F;&gt;一样</td>
-</tr>
-<tr>
-<td align="center">@Bean</td>
-<td align="center">使用在方法上，标注将该方法的返回值存储到Spring容器中</td>
-</tr>
-<tr>
-<td align="center">@PropertySource</td>
-<td align="center">用于加载.properties文件中的配置</td>
-</tr>
-<tr>
-<td align="center">@Import</td>
-<td align="center">用于导入其他配置类</td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1049,7 +945,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -147,6 +147,233 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/01/spring/Spring/Spring%E6%95%B4%E5%90%88Junit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/01/spring/Spring/Spring%E6%95%B4%E5%90%88Junit/" class="post-title-link" itemprop="url">Spring整合Junit</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-07-01 20:44:16 / 修改时间：20:50:53" itemprop="dateCreated datePublished" datetime="2023-07-01T20:44:16+08:00">2023-07-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-原始Junit测试Spring的问题"><a href="#1-原始Junit测试Spring的问题" class="headerlink" title="1. 原始Junit测试Spring的问题"></a>1. 原始Junit测试Spring的问题</h2><p>在测试类中，每个测试方法都有以下两行代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext app = new        AnnotationConfigApplicationContext(SpringConfiguration.class);  </span><br><span class="line">UserService userService = app.getBean(UserService.class);</span><br></pre></td></tr></table></figure>
+<p>它的作用是获取容器，如果不写的话， 会提示空指针异常</p>
+<h2 id="2-解决思路"><a href="#2-解决思路" class="headerlink" title="2. 解决思路"></a>2. 解决思路</h2><ul>
+<li>让SpringJuint负责创建Spring容器，但需要将配置文件的名称告诉它</li>
+<li>将需要进行测试的Bean直接在测试类中进行注入</li>
+</ul>
+<h2 id="3-Spring集成Junit步骤"><a href="#3-Spring集成Junit步骤" class="headerlink" title="3. Spring集成Junit步骤"></a>3. Spring集成Junit步骤</h2><ol>
+<li>导入Spring集成Junit的坐标</li>
+<li>使用@Runwith注解替换原来的运行期</li>
+<li>使用@ContextConfiguration指定配置文件或配置类</li>
+<li>使用@Autowired注入需要测试的对象</li>
+<li>创建测试方法进行测试</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/30/spring/Spring/Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/30/spring/Spring/Spring%E6%B3%A8%E8%A7%A3%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">Spring注解开发</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-30 23:40:23" itemprop="dateCreated datePublished" datetime="2023-06-30T23:40:23+08:00">2023-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-07-01 20:43:48" itemprop="dateModified" datetime="2023-07-01T20:43:48+08:00">2023-07-01</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-Spring原始注解"><a href="#1-Spring原始注解" class="headerlink" title="1. Spring原始注解"></a>1. Spring原始注解</h2><p>Spring是轻代码而重配置的框架，配置比较繁重，影响开发效率， 所以注解开发是一种趋势，注解代替xml配置文件可以简化配置，提高开发效率<br>Spring原始注解主要是替代&lt;Bean&gt;的配置</p>
+<table>
+<thead>
+<tr>
+<th align="center">注解</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">@Component</td>
+<td align="center">使用在类上用于实例化Bean</td>
+</tr>
+<tr>
+<td align="center">@Controller</td>
+<td align="center">使用在web层类上用于实例化Bean</td>
+</tr>
+<tr>
+<td align="center">@Service</td>
+<td align="center">使用在service层类上用于实例化Bean</td>
+</tr>
+<tr>
+<td align="center">@Repository</td>
+<td align="center">使用在dao层类上用于实例化Bean</td>
+</tr>
+<tr>
+<td align="center">@Autowired</td>
+<td align="center">使用在字段上用于根据类型依赖注入</td>
+</tr>
+<tr>
+<td align="center">@Qualifier</td>
+<td align="center">结合@Autowired一起使用用于根据名称进行依赖注入</td>
+</tr>
+<tr>
+<td align="center">@Resource</td>
+<td align="center">相当于@Autowired+@Qualifier，按照名称进行注入</td>
+</tr>
+<tr>
+<td align="center">@Value</td>
+<td align="center">注入普通属性</td>
+</tr>
+<tr>
+<td align="center">@Scope</td>
+<td align="center">标注Bean的作用范围</td>
+</tr>
+<tr>
+<td align="center">@PostConstruce</td>
+<td align="center">使用在方法上标注该方法是Bean的初始化方法</td>
+</tr>
+<tr>
+<td align="center">@PreDestroy</td>
+<td align="center">使用在方法上标注该方法是Bean的销毁方法</td>
+</tr>
+</tbody></table>
+<p><em>使用注解进行开发时，需要在applicationContext.xml中配置组件扫描，作用是指定哪个包及其子包下的Bean需要进行扫描以便识别注解配置的类、字段和方法</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package=&quot;com.xjy&quot;&gt;&lt;/context:component-scan&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Spring新注解"><a href="#2-Spring新注解" class="headerlink" title="2. Spring新注解"></a>2. Spring新注解</h2><p>使用上面的注解不能全部替代xml配置文件，还需要使用注解替代的配置如下：</p>
+<ul>
+<li>非自定义的Bean的配置：&lt;bean&gt;</li>
+<li>加载properties文件的配置：&lt;context:property-placeholder&gt;</li>
+<li>组件扫描的配置：&lt;context:component-scan&gt;</li>
+<li>引入其他文件：&lt;import&gt;</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">注解</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">@Configuration</td>
+<td align="center">用于指定当前类是一个Spring配置类，当创建容器时会从该类上加载注解</td>
+</tr>
+<tr>
+<td align="center">@ComponentScan</td>
+<td align="center">用于指定Spring在初始化容器时要扫描的包，作用和在Spring的xml配置文件中的&lt;context:component-scan base-package&#x3D;”com.xjy”&#x2F;&gt;一样</td>
+</tr>
+<tr>
+<td align="center">@Bean</td>
+<td align="center">使用在方法上，标注将该方法的返回值存储到Spring容器中</td>
+</tr>
+<tr>
+<td align="center">@PropertySource</td>
+<td align="center">用于加载.properties文件中的配置</td>
+</tr>
+<tr>
+<td align="center">@Import</td>
+<td align="center">用于导入其他配置类</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/30/spring/Spring/Spring%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E6%BA%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -880,228 +1107,6 @@ Area of square: 25
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/20/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/20/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">正则表达式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-20 12:12:45 / 修改时间：12:32:16" itemprop="dateCreated datePublished" datetime="2023-04-20T12:12:45+08:00">2023-04-20</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>在完成软件构造lab3的过程中，用到了正则表达式，为了更好地完成实验，对正则表达式以及java中正则表达式的使用进行复习并记录如下。  </p>
-<h2 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><ol>
-<li><p>正则表达式是一种用于匹配和操作文本模式的工具。它可以用来搜索、替换和验证文本数据。</p>
-</li>
-<li><p>正则表达式由字符和特殊字符组成。字符可以匹配自身，而特殊字符用于表示模式中的特定规则。</p>
-</li>
-<li><p>常见的特殊字符包括：</p>
-<ul>
-<li><code>.</code>：匹配任意单个字符（除了换行符）。</li>
-<li><code>*</code>：匹配前面的字符零次或多次。</li>
-<li><code>+</code>：匹配前面的字符一次或多次。</li>
-<li><code>?</code>：匹配前面的字符零次或一次。</li>
-<li><code>^</code>：匹配字符串的开头。</li>
-<li><code>$</code>：匹配字符串的结尾。</li>
-<li><code>\</code>：转义字符，用于匹配特殊字符本身。</li>
-</ul>
-</li>
-<li><p>字符类用于匹配一组字符中的任意一个字符。使用方括号<code>[]</code>表示字符类，例如<code>[abc]</code>匹配字符”a”、”b”或”c”。</p>
-</li>
-<li><p>元字符用于表示一组字符的缩写形式，常见的元字符包括：</p>
-<ul>
-<li><code>\d</code>：匹配任意数字。</li>
-<li><code>\w</code>：匹配任意字母、数字或下划线。</li>
-<li><code>\s</code>：匹配任意空白字符（空格、制表符、换行符等）。</li>
-<li><code>\D</code>：匹配任意非数字字符。</li>
-<li><code>\W</code>：匹配任意非字母、数字或下划线字符。</li>
-<li><code>\S</code>：匹配任意非空白字符。</li>
-</ul>
-</li>
-<li><p>量词用于指定匹配的次数。常见的量词包括：</p>
-<ul>
-<li><code>&#123;n&#125;</code>：匹配前面的字符恰好n次。</li>
-<li><code>&#123;n,&#125;</code>：匹配前面的字符至少n次。</li>
-<li><code>&#123;n,m&#125;</code>：匹配前面的字符至少n次且不超过m次。</li>
-<li><code>*</code>、<code>+</code>、<code>?</code>都可以看作是特殊的量词，分别表示零次或多次、一次或多次、零次或一次。</li>
-</ul>
-</li>
-<li><p>分组和捕获允许将一部分模式分组并进行操作。使用小括号<code>()</code>表示分组，使用捕获组可以在匹配时提取分组的内容。</p>
-</li>
-</ol>
-<h3 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h3><p>以在软构实验中用到的一个捕获原子的轨道系统上电子数的正则表达式为例：</p>
-<pre><code>\s*NumberOfElectron\s*::=\s*(\d+\d+;)+\d+\d+
-</code></pre>
-<ol>
-<li>\s* 表示匹配任意空格</li>
-<li>\s*NumberOfElectron\s*::&#x3D; 表示开始读入电子数</li>
-<li>(\d+\d+;)+ 表示匹配轨道号及对应的电子数</li>
-<li>\d+\d+ 表示至少有一层轨道</li>
-</ol>
-<h2 id="在java中的使用"><a href="#在java中的使用" class="headerlink" title="在java中的使用"></a>在java中的使用</h2><ol>
-<li>导入相关包<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.regex.Matcher;</span><br><span class="line"><span class="keyword">import</span> java.util.regex.Pattern;</span><br></pre></td></tr></table></figure></li>
-<li>创建一个正则表达式模式：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">regex</span> <span class="operator">=</span> <span class="string">&quot;pattern&quot;</span>; <span class="comment">// 正则表达式模式</span></span><br><span class="line"><span class="type">Pattern</span> <span class="variable">pattern</span> <span class="operator">=</span> Pattern.compile(regex);</span><br></pre></td></tr></table></figure></li>
-<li>创建一个匹配器对象：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">input</span> <span class="operator">=</span> <span class="string">&quot;input&quot;</span>; <span class="comment">// 要匹配的输入字符串</span></span><br><span class="line"><span class="type">Matcher</span> <span class="variable">matcher</span> <span class="operator">=</span> pattern.matcher(input);</span><br></pre></td></tr></table></figure></li>
-<li>执行匹配操作：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">boolean</span> <span class="variable">matches</span> <span class="operator">=</span> matcher.matches(); <span class="comment">// 检查整个输入字符串是否匹配模式</span></span><br></pre></td></tr></table></figure></li>
-<li>根据需要进行进一步的操作：<ul>
-<li><code>matches()</code>：检查整个输入字符串是否匹配模式。</li>
-<li><code>find()</code>：查找下一个匹配项。</li>
-<li><code>group()</code>：返回与上一次匹配相匹配的子字符串。</li>
-<li><code>start()</code>：返回上一次匹配的子字符串的起始索引。</li>
-<li><code>end()</code>：返回上一次匹配的子字符串的结束索引。</li>
-</ul>
-</li>
-</ol>
-<p><em>此外，IDEA中也提供了很多常见的正则表达式，如火车车次，身份证号码，迅雷链接等，使用快捷键 Alt + A 即可</em><br><img src="https://s2.loli.net/2023/05/15/InAHkXm95jvcERF.png" alt="idea常见正则表达式.png"></p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>正则表达式具有很强的文本处理能力，但是它的深入学习和使用是一个很复杂的主题，需要我在以后的学习和实践中不断深入地了解和使用。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/08/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8F%AF%E5%A4%8D%E7%94%A8%E6%80%A7(3)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="晴雨">
-      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晴雨屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/08/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E4%BB%A3%E7%A0%81%E7%9A%84%E5%8F%AF%E5%A4%8D%E7%94%A8%E6%80%A7(3)/" class="post-title-link" itemprop="url">代码的可复用性(3)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-08 21:59:12 / 修改时间：22:25:23" itemprop="dateCreated datePublished" datetime="2023-04-08T21:59:12+08:00">2023-04-08</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本篇讲介绍系统层次的可复用性——框架。<br>Java 框架是开发人员在用 Java 编程语言来创建应用时，所使用的一系列预编写代码。</p>
-<p>Java 框架是 Java 编程语言所特有的，是一个用于开发软件应用和 Java 程序的 Java 平台。</p>
-<p>Java 框架由一系列可重用的预编写代码组成，它们起着模板的作用，开发人员可以根据需要通过填充自定义代码来创建应用。</p>
-<p>框架创建后可反复使用，这样开发人员即可以在一定的结构上来编写应用，而无需从头开始手动创建。</p>
-<p>Java 框架中可以包含预定义类（例如对象类别）和函数，用于处理、输入和管理硬件设备，以及与系统软件进行交互。当然，具体的框架内容要取决于框架的类型、Java 开发人员的技能水平、他们所要完成的工作以及自己的偏好。</p>
-<h2 id="为什么要使用框架"><a href="#为什么要使用框架" class="headerlink" title="为什么要使用框架"></a>为什么要使用框架</h2><p>框架的优越性在于：  </p>
-<ol>
-<li>集中精力完成系统的业务逻辑设计；  </li>
-<li>使程序更容易扩展和维护，稳定性更强；  </li>
-<li>处理系统很多细节问题，比如安全性问题。</li>
-</ol>
-<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><ol>
-<li>导入相关的jar包  </li>
-<li>配置项目配置文件（比如web.xml），让项目用框架处理各种行为  </li>
-<li>添加框架配置文件（比如struts-config.xml），设定框架如何处理各种行为（比如接收到某个请求时，调用哪个类处理）  </li>
-<li>编写业务逻辑（继承、实现框架中的类、接口），完成具体处理操作。</li>
-</ol>
-<h2 id="主流框架"><a href="#主流框架" class="headerlink" title="主流框架"></a>主流框架</h2><p>用得最多的Java三大框架是Struts、Spring和Hibernate ，简称SSH；14年以后逐步开始采用Spring、SpringMVC和MyBatis，简称SSM；而现在Java开发用得最多的框架其实是SpringBoot。</p>
-<h3 id="SSH的特点"><a href="#SSH的特点" class="headerlink" title="SSH的特点"></a>SSH的特点</h3><p>SSH框架是以Struts框架进行MVC分离、控制业务跳转，同时使用Hibernate进行持久化，最后配合Spring的统一管理进行实现的开发框架。相对于传统的J2EE开发框架来讲性能相对较高、资源消耗相对较少。具体优势如下：</p>
-<ul>
-<li>框架进行了代码分层，将Java代码和HTML代码进行分层，大大降低了开发人员的技术难度，不需要同时精通Java后端知识和Web前端知识。</li>
-<li>由于使用了Struts框架进行了MVC分离，降低了各层代码间的耦合度。</li>
-<li>与Spring的AOP机制相互独立，互不影响。</li>
-<li>使用SSH框架开发项目，能够大大提高项目的开发效率与开发质量。<br>良好的扩展性和维护性。</li>
-</ul>
-<h3 id="SSM框架的特点"><a href="#SSM框架的特点" class="headerlink" title="SSM框架的特点"></a>SSM框架的特点</h3><p>SSM框架看着是Spring+SpringMVC+MyBatis三个框架整合而成的，其实SpringMVC属于Spring框架，所以相当于SSM框架就是Spring和Mybatis两个框架的整合运用</p>
-<ul>
-<li>对于MVC模式的实现，SpringMvc更加的轻量。</li>
-<li>由于SpringMvc本身属于Spring，因此与Spring的配合使用契合度更高。</li>
-<li>Mybatis相对Hibernate更加轻量，同时将Sql和业务代码进行了很好的解耦。</li>
-<li>MyBatis的学习门槛更低，相对于传统的JDBC差距不大，更好入门及掌握。</li>
-</ul>
-<h3 id="SpringBoot框架"><a href="#SpringBoot框架" class="headerlink" title="SpringBoot框架"></a>SpringBoot框架</h3><p>SpringBoot框架是基于Spring4.0设计的，使用SpringBoot框架进行应用开发能够使用Spring框架所有优秀特性，同时还能够减少各种复杂的配置过程，降低各依赖包的冲突、增强系统的稳定性。我们可以将SpringBoot框架理解为我们使用SSM框架的一个脚手架框架使用，使用它能够非常方便的构建我们的应用。</p>
-<ul>
-<li>以非常方便和快速的构建Spring相关应用</li>
-<li>可以快速构建可执行的Jars和Wars文件</li>
-<li>内嵌了Servlet容器，如Tomcat、Jetty、Undertow</li>
-<li>使用SpringBoot框架开发项目，可以让Spring的配置操作几乎为零</li>
-<li>SpringBoot框架提供了运行时监控功能</li>
-<li>框架极大的提高了项目开发和部署的效率</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1171,7 +1176,7 @@ Area of square: 25
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
