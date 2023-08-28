@@ -147,6 +147,170 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/03/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/Liskov%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/03/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/Liskov%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99/" class="post-title-link" itemprop="url">Liskov替换原则</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-03 22:42:44 / 修改时间：23:00:42" itemprop="dateCreated datePublished" datetime="2023-05-03T22:42:44+08:00">2023-05-03</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Liskov替换原则（Liskov Substitution Principle，LSP）是面向对象设计中的重要原则之一。本文将介绍Liskov替换原则在Java中的应用，以及如何遵循该原则来构建高质量的代码。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Liskov替换原则是由计算机科学家Barbara Liskov提出的，它是SOLID原则中的一部分。该原则表述为：“如果S是T的子类型，那么在程序中任何使用T的地方都可以用S替换，而不会导致程序的行为发生变化。”简而言之，LSP要求子类型必须能够替代父类型，而不会引入意外的行为变化。</p>
+<h2 id="接口与实现的一致性"><a href="#接口与实现的一致性" class="headerlink" title="接口与实现的一致性"></a>接口与实现的一致性</h2><p>在Java中，接口是一种常见的定义抽象行为的方式。遵循LSP意味着实现接口的具体类应该能够完全替代接口本身，而不会破坏系统的正确性。具体类应该遵循接口定义的约定和行为，不得修改接口方法的前置条件、后置条件和约定。</p>
+<h2 id="继承关系的合理性"><a href="#继承关系的合理性" class="headerlink" title="继承关系的合理性"></a>继承关系的合理性</h2><p>在Java中，继承是一种重要的代码复用和扩展机制。但是，滥用继承关系可能导致违反LSP。子类应该在继承父类的同时保持一致性和合理性。子类可以扩展父类的行为，但不应该修改父类的约定或者破坏原有的行为。违反LSP的继承关系可能导致意外的错误和行为不一致。</p>
+<h2 id="参数和返回类型的一致性"><a href="#参数和返回类型的一致性" class="headerlink" title="参数和返回类型的一致性"></a>参数和返回类型的一致性</h2><p>方法的参数和返回类型也需要符合LSP。子类的方法应该能够接受父类方法所接受的参数类型，并且返回类型应该是父类方法返回类型的子类型或者相等类型。这确保了代码在使用多态时的正确性。</p>
+<h2 id="设计模式与LSP"><a href="#设计模式与LSP" class="headerlink" title="设计模式与LSP"></a>设计模式与LSP</h2><p>LSP对于许多常见的设计模式也有指导意义。例如，策略模式、模板方法模式等都要求子类能够替代父类并保持行为的一致性。遵循LSP可以增强设计模式的可维护性和可扩展性。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>接下来举一个LSP的经典例子：长方形与正方形问题。<br>在这个例子中，长方形是一个父类，而正方形是一个子类，我们将看到如何遵循LSP以确保正确的行为。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Rectangle</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">int</span> width;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">int</span> height;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">int</span> width)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.width = width;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setHeight</span><span class="params">(<span class="type">int</span> height)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.height = height;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">calculateArea</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> width * height;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Square</span> <span class="keyword">extends</span> <span class="title class_">Rectangle</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setWidth</span><span class="params">(<span class="type">int</span> width)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.setWidth(width);</span><br><span class="line">        <span class="built_in">super</span>.setHeight(width);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setHeight</span><span class="params">(<span class="type">int</span> height)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>.setWidth(height);</span><br><span class="line">        <span class="built_in">super</span>.setHeight(height);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">LSPExample</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Rectangle</span> <span class="variable">rectangle</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Rectangle</span>();</span><br><span class="line">        rectangle.setWidth(<span class="number">5</span>);</span><br><span class="line">        rectangle.setHeight(<span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Area of rectangle: &quot;</span> + rectangle.calculateArea());</span><br><span class="line">  </span><br><span class="line">        <span class="type">Rectangle</span> <span class="variable">square</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Square</span>();</span><br><span class="line">        square.setWidth(<span class="number">5</span>);</span><br><span class="line">        square.setHeight(<span class="number">10</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Area of square: &quot;</span> + square.calculateArea());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，我们有一个<code>Rectangle</code>类，它有一个宽度和高度，并提供了计算面积的方法。然后，我们创建了一个子类<code>Square</code>，它继承自<code>Rectangle</code>。<code>Square</code>类重写了父类的<code>setWidth</code>和<code>setHeight</code>方法，以确保宽度和高度始终相等。</p>
+<p>在主方法中，我们首先创建了一个<code>Rectangle</code>对象，并设置宽度为5，高度为10，然后计算面积。接下来，我们创建了一个<code>Square</code>对象，并使用相同的宽度和高度进行设置，并计算面积。</p>
+<p>由于正方形是长方形的特例，根据Liskov替换原则，我们应该能够将<code>Square</code>对象替换为<code>Rectangle</code>对象，而不会引起任何意外的行为变化。在这个例子中，我们确实能够如此，因为<code>Square</code>类的行为与<code>Rectangle</code>类的行为一致。</p>
+<p>运行结果如下：</p>
+<pre><code>Area of rectangle: 50
+Area of square: 25
+</code></pre>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>Liskov替换原则是一项重要的面向对象设计原则，能够帮助我们构建高质量的Java代码。通过遵循LSP，我们可以确保代码的正确性、可维护性和可扩展性。在日常的开发过程中，我们应该时刻牢记LSP的原则，并将其作为代码设计的基石，从而构建出更加健壮和可靠的软件系统。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/29/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/29/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">装饰器模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-29 22:46:43" itemprop="dateCreated datePublished" datetime="2023-04-29T22:46:43+08:00">2023-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-30 09:46:40" itemprop="dateModified" datetime="2023-04-30T09:46:40+08:00">2023-04-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在完成lab3的过程中，我选择了第二个应用程序，其需要使用装饰器模式来实现这个系统的特殊功能：一个行星可以带有若干个卫星。为了完成这个需求，进行对装饰器模式的复习并记录。</p>
+<pre><code> 在这里，首先推荐一个装饰器模式的讲解视频，【设计模式-装饰者模式 (Decorator Pattern)-保姆级攻略，实战项目】 https://www.bilibili.com/video/BV1Vp4y187dK/?share_source=copy_web&amp;vd_source=9c4a2ec9fdc766cee61450777a0475fb 个人感觉讲的挺好的
+</code></pre>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>装饰器模式是一种通过包装对象来扩展其功能的设计模式。它通过创建一个包装器类，该类包含与原始对象相同的接口，并在内部维护一个原始对象的引用。装饰器类可以在调用原始对象之前或之后执行附加的操作，从而实现对原始对象功能的透明扩展。<br>本文将介绍Java中的装饰器模式，以及如何使用它来增添代码的灵活性和可扩展性。</p>
+<h2 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h2><ol>
+<li>抽象组件（Component）：定义了原始对象和装饰器对象的公共接口，确保它们都可以被替代使用。</li>
+<li>具体组件（ConcreteComponent）：实现了抽象组件接口，是被装饰的原始对象。</li>
+<li>抽象装饰器（Decorator）：继承了抽象组件，并持有一个抽象组件的引用，以便可以包装原始对象。</li>
+<li>具体装饰器（ConcreteDecorator）：扩展了抽象装饰器，实现了装饰器的具体功能，并在调用原始对象之前或之后执行额外的操作。</li>
+</ol>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>以我上面说的视频所举的奶茶定价为实例来使用装饰器模式，如下。<br>首先，我们定义一个抽象组件接口<code>MilkTea</code>，其中包含了计算奶茶价格的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">MilkTea</span> &#123;</span><br><span class="line">    <span class="type">double</span> <span class="title function_">getPrice</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，我们创建一个具体组件<code>BaseMilkTea</code>，它实现了<code>MilkTea</code>接口，并表示基础的奶茶：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BaseMilkTea</span> <span class="keyword">implements</span> <span class="title class_">MilkTea</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> price;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">BaseMilkTea</span><span class="params">(<span class="type">double</span> price)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.price = price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getPrice</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> price;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来，我们创建一个抽象装饰器<code>MilkTeaDecorator</code>，它也实现了<code>MilkTea</code>接口，并包含一个<code>MilkTea</code>的引用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">MilkTeaDecorator</span> <span class="keyword">implements</span> <span class="title class_">MilkTea</span> &#123;</span><br><span class="line">    <span class="keyword">protected</span> MilkTea milkTea;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MilkTeaDecorator</span><span class="params">(MilkTea milkTea)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.milkTea = milkTea;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getPrice</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> milkTea.getPrice();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，我们可以创建具体装饰器来实现特定的功能。假设我们要实现加糖和加珍珠两种装饰器。</p>
+<p>首先，我们创建一个装饰器<code>SugarDecorator</code>，它在奶茶的基础价格上增加糖的价格：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SugarDecorator</span> <span class="keyword">extends</span> <span class="title class_">MilkTeaDecorator</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> sugarPrice;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">SugarDecorator</span><span class="params">(MilkTea milkTea, <span class="type">double</span> sugarPrice)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(milkTea);</span><br><span class="line">        <span class="built_in">this</span>.sugarPrice = sugarPrice;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getPrice</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.getPrice() + sugarPrice;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后，我们创建另一个装饰器<code>PearlDecorator</code>，它在奶茶的基础价格上增加珍珠的价格：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PearlDecorator</span> <span class="keyword">extends</span> <span class="title class_">MilkTeaDecorator</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> pearlPrice;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">PearlDecorator</span><span class="params">(MilkTea milkTea, <span class="type">double</span> pearlPrice)</span> &#123;</span><br><span class="line">        <span class="built_in">super</span>(milkTea);</span><br><span class="line">        <span class="built_in">this</span>.pearlPrice = pearlPrice;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">getPrice</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.getPrice() + pearlPrice;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后，我们可以使用装饰器来计算奶茶的价格：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个基础奶茶</span></span><br><span class="line"><span class="type">MilkTea</span> <span class="variable">milkTea</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BaseMilkTea</span>(<span class="number">3.5</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加糖和珍珠</span></span><br><span class="line">milkTea = <span class="keyword">new</span> <span class="title class_">SugarDecorator</span>(milkTea, <span class="number">0.5</span>);</span><br><span class="line">milkTea = <span class="keyword">new</span> <span class="title class_">PearlDecorator</span>(milkTea, <span class="number">1.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 计算最终价格</span></span><br><span class="line"><span class="type">double</span> <span class="variable">totalPrice</span> <span class="operator">=</span> milkTea.getPrice();</span><br><span class="line">System.out.println(<span class="string">&quot;Total Price: $&quot;</span> + totalPrice);</span><br></pre></td></tr></table></figure>
+<p>通过使用装饰器模式，我们可以动态地为奶茶添加额外的配料，并计算最终的价格，而无需修改基础奶茶的代码。</p>
+<p>这个实例展示了装饰器模式在奶茶定价中的应用，可以根据需求灵活地组合不同的装饰器来计算奶茶的价格。</p>
+<p><em>在奶茶定价的这个实例中，实际上，假设我们需要为奶茶选择不同的口味和加料，有4种口味和5种料，如果为每种口味和每种料都一一对应的编写类，那么需要编写20个类；但是使用装饰器模式，只需要11个类——实现口味和加料的两个父类，以及分别对应的共9个子类。</em></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/20/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -864,7 +1028,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
