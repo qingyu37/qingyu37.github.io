@@ -147,6 +147,77 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/28/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/AF%E3%80%81RI%E5%92%8Csafety%20from%20rep-exposure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="晴雨">
+      <meta itemprop="description" content="晴雨之中，唯得一小屋以安。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晴雨屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/28/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/AF%E3%80%81RI%E5%92%8Csafety%20from%20rep-exposure/" class="post-title-link" itemprop="url">AF、RI和safety from rep-exposure</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-28 22:50:50 / 修改时间：23:30:02" itemprop="dateCreated datePublished" datetime="2023-03-28T22:50:50+08:00">2023-03-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在Java编程语言中，代码的可读性和可维护性是非常重要的。为了确保这些特性，Java提供了一些机制来确保代码的正确性和安全性。其中包括AF（Abstraction Function）、RI（Representation Invariant）和Safety from Rep Exposure。</p>
+<h2 id="抽象函数-AF"><a href="#抽象函数-AF" class="headerlink" title="抽象函数(AF)"></a>抽象函数(AF)</h2><p>首先，让我们来看看什么是抽象函数（Abstraction Function）。在Java中，抽象函数是一种将数据结构抽象化的方式，可以将其看作一个黑盒子。通过隐藏数据结构的内部细节，抽象函数使我们能够更好地管理代码，并且更容易修改和维护它。例如，在Java中，List接口可以被视为一种抽象函数，它定义了访问列表的方法，但并不关心它是如何实现的。</p>
+<h2 id="表示不变量-RI"><a href="#表示不变量-RI" class="headerlink" title="表示不变量(RI)"></a>表示不变量(RI)</h2><p>其次，我们来看看表示不变量（Representation Invariant）。在Java中，表示不变量是一种约束，确保对象的状态始终符合我们期望的条件。通常，它们是通过对类的成员变量和方法进行注释来定义的。例如，假设我们有一个叫做Person的类，它有一个成员变量叫做age。我们可以通过注释来表示age必须是一个正整数，即表示不变式为“age &gt; 0”。</p>
+<h2 id="防止表示泄露"><a href="#防止表示泄露" class="headerlink" title="防止表示泄露"></a>防止表示泄露</h2><p>最后，让我们来看看防止表示泄露（Safety from Rep Exposure）。在Java中，表示泄露是一种很重要的安全问题，它可能导致对象状态的意外更改。为了防止这种情况发生，Java要求我们使用访问方法来访问对象的状态，而不是直接访问其成员变量。这意味着我们需要将类的成员变量设置为private，并提供公共方法来访问它们。例如，假设我们有一个叫做BankAccount的类，它有一个成员变量叫做balance。我们可以通过将balance设置为private，然后提供一个名为getBalance的公共方法来防止对balance的表示曝露。</p>
+<p>综上所述，AF、RI和Safety from Rep Exposure是Java编程语言中的重要概念，它们可以帮助我们确保代码的正确性和安全性。通过使用抽象函数，我们可以将代码抽象化，从而更容易地管理和维护它。通过使用表示不变式，我们可以确保对象的状态始终符合我们期望的条件。通过使用Safety from Rep Exposure，我们可以防止表示曝露，从而保护对象的状态免受意外更改的影响。</p>
+<h2 id="checkRep"><a href="#checkRep" class="headerlink" title="checkRep"></a>checkRep</h2><p>checkRep()是一种在代码中用于检查表示不变式（Representation Invariant）的方法。checkRep()方法可以用于确保对象的状态始终符合我们预期的条件，从而帮助我们识别和排除代码中的错误。</p>
+<p>通常，checkRep()方法被定义为一个私有方法，并且在类的构造函数和公共方法中调用。在这些方法中，checkRep()会检查对象的状态是否符合表示不变式的要求。如果状态不符合要求，checkRep()方法通常会抛出一个异常或者执行一些其他的错误处理操作。</p>
+<p>下面是一个简单的例子来演示如何在Java中使用checkRep()方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">        checkRep();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        checkRep();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">        checkRep();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">checkRep</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (age &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;Age cannot be negative.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在这个例子中，Person类有一个表示不变式，即age必须大于等于0。在Person类的构造函数和公共方法中，checkRep()方法被调用来检查对象的状态是否符合表示不变式的要求。如果age小于0，checkRep()方法将抛出一个IllegalArgumentException异常，从而提醒我们代码中的错误。</p>
+<p>总的来说，checkRep()方法可以帮助我们在Java代码中确保对象的状态始终符合表示不变式的要求，从而提高代码的正确性和可维护性。</p>
+<p>checkRep可以在自己编写代码时用来提高代码的正确性，而在最后交付时可以将其注释掉，以减少代码的执行代价。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说，AF、RI和safety from rep exposure是用来保证代码的正确性和安全性，然后可以根据这些来编写checkRep函数来进一步提高代码的安全性和可维护性。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/27/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/equals%20and%20hashcode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -389,7 +460,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
